@@ -1,0 +1,77 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <RootNamespace>AlquilaFacilPlatform.Tests</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="coverlet.collector" Version="6.0.0" />
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.6" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+        <PackageReference Include="Moq" Version="4.20.72" />
+        <PackageReference Include="SpecFlow" Version="3.9.74" />
+        <PackageReference Include="SpecFlow.xUnit" Version="3.9.74" />
+        <PackageReference Include="xunit" Version="2.8.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Xunit" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BookingService\BookingService.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="CoreEntitiesUnitTests\CoreEntitiesUnitTests.csproj" />
+      <Content Include="CoreIntegrationTests\CoreIntegrationTests.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US01RegistrarEspacio.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US02IniciarSesión.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US03RegistrarEspacios.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US04BuscarEspaciosDisponibles.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US05FiltrarEspaciosDisponibles.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US06VisualizarInformaciónDelEspacio.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US07ReservarEspacios.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US08GestionarCalendarioDeReservas.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US09CalificarYComentarSobreEspacios.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US10NotificarSobreActividades.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US11ControlarEspaciosFavoritos.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US12VisualizarEspaciosPropiosPublicados.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US13ActualizarPerfilYSesiónDeUsuario.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US14AdquirirMembresíaPremium.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US15ReportarEspaciosInseguros.feature" />
+      <UpToDateCheckInput Remove="CoreBehaviourDrivenDevelopment\US16VisualizarEspaciosReportadosPorElUsuario.feature" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US01RegistrarEspacio.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US02IniciarSesión.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US03RegistrarEspacios.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US04BuscarEspaciosDisponibles.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US05FiltrarEspaciosDisponibles.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US06VisualizarInformaciónDelEspacio.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US07ReservarEspacios.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US08GestionarCalendarioDeReservas.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US09CalificarYComentarSobreEspacios.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US10NotificarSobreActividades.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US11ControlarEspaciosFavoritos.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US12VisualizarEspaciosPropiosPublicados.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US13ActualizarPerfilYSesiónDeUsuario.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US14AdquirirMembresíaPremium.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US15ReportarEspaciosInseguros.feature.cs" />
+      <UpToDateCheckBuild Remove="CoreBehaviourDrivenDevelopment\US16VisualizarEspaciosReportadosPorElUsuario.feature.cs" />
+    </ItemGroup>
+
+</Project>
