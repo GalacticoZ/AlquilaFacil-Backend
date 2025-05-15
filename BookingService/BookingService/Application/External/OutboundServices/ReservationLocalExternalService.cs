@@ -1,0 +1,29 @@
+using BookingService.Application.External.OutboundServices;
+using BookingService.Interfaces.ACL.DTOs;
+using BookingService.Interfaces.ACL.Facades;
+
+namespace BookingService.Application.External.OutboundServices;
+
+
+public class ReservationLocalExternalService(ILocalsContextFacade localsContextFacade) : IReservationLocalExternalService
+{
+    public Task<bool> LocalReservationExists(int reservationId)
+    {
+        return localsContextFacade.LocalExists(reservationId);
+    }
+
+    public async Task<IEnumerable<LocalDTO>> GetLocalsByUserId(int userId)
+    {
+        return await localsContextFacade.GetLocalsByUserId(userId);
+    }
+
+    public async Task<bool> IsLocalOwner(int userId, int localId)
+    {
+        return await localsContextFacade.IsLocalOwner(userId, localId);
+    }
+    
+    public async Task<int> GetOwnerIdByLocalId(int localId)
+    {
+        return await localsContextFacade.GetLocalOwnerIdByLocalId(localId);
+    }
+}
