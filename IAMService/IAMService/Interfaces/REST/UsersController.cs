@@ -90,10 +90,10 @@ public class UsersController(
     
     [HttpGet("user-exists/{userId:int}")]
     [AllowAnonymous]
-    public IActionResult IsUserExists([FromRoute] int profileId)
+    public IActionResult IsUserExists([FromRoute] int userId)
     {
         try {
-            var isUsersExists = iamContextFacade.UsersExists(profileId);
+            var isUsersExists = iamContextFacade.UsersExists(userId);
             return Ok(isUsersExists);
         }catch(Exception e) {
             return BadRequest(new { message = e.Message });
