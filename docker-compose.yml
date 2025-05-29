@@ -1,0 +1,156 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: alquilafacil
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+#  zookeeper:
+#    image: bitnami/zookeeper:latest
+#    container_name: zookeeper
+#    environment:
+#      - ALLOW_ANONYMOUS_LOGIN=yes
+#    ports:
+#      - "2181:2181"
+
+#  kafka:
+#    image: bitnami/kafka:latest
+#    container_name: kafka
+#    depends_on:
+#      - zookeeper
+#    environment:
+#      - KAFKA_BROKER_ID=1
+#      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+#      - KAFKA_LISTENERS=PLAINTEXT://:9092
+#      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+#      - ALLOW_PLAINTEXT_LISTENER=yes
+#    ports:
+#      - "9092:9092"
+
+  iam-service:
+    build:
+      context: .
+      dockerfile: Services/IAMService/IAMService/Dockerfile
+    container_name: iam-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8011:8011"
+
+  locals-service:
+    build:
+      context: .
+      dockerfile: Services/LocalsService/LocalsService/Dockerfile
+    container_name: locals-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8012:8012"
+
+  booking-service:
+    build:
+      context: .
+      dockerfile: Services/BookingService/BookingService/Dockerfile
+    container_name: booking-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8013:8013"
+        
+  profiles-service:
+    build:
+      context: .
+      dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
+    container_name: profiles-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8014:8014"
+        
+  notification-service:
+    build:
+      context: .
+      dockerfile: Services/NotificationService/NotificationService/Dockerfile
+    container_name: notification-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8015:8015"
+
+  subscriptions-service:
+    build:
+      context: .
+      dockerfile: Services/SubscriptionsService/SubscriptionsService/Dockerfile
+    container_name: subscriptions-service
+    depends_on:
+#      - kafka
+      mysql:
+        condition: service_healthy
+#    environment:
+#      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8016:8016"
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - iam-service
+      - locals-service
+      - booking-service
+      - profiles-service
+      - notification-service
+      - subscriptions-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8000:80" 
+
+volumes:
+  mysql-data:
