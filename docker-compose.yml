@@ -1,21 +1,23 @@
 version: '3.8'
 
 services:
-  mysql:
-    image: mysql:8.0
-    container_name: mysql
+  iam-database:
+    image: 'mysql:latest'
+    container_name: iam-database
     environment:
       MYSQL_ROOT_PASSWORD: 12345678
-      MYSQL_DATABASE: alquilafacil
+      MYSQL_DATABASE: iam-database
+      MYSQL_USER: iamuser
+      MYSQL_PASSWORD: iamsecure
     ports:
       - "3307:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
-      interval: 5s
-      timeout: 5s
+      interval: 10s
+      timeout: 10s
       retries: 10
     volumes:
-      - mysql-data:/var/lib/mysql
+      - iam-database-data:/var/lib/mysql
 
 #  zookeeper:
 #    image: bitnami/zookeeper:latest
@@ -46,7 +48,7 @@ services:
     container_name: iam-service
     depends_on:
 #      - kafka
-      mysql:
+      iam-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -54,6 +56,24 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8011:8011"
+        
+  locals-database:
+    image: 'mysql:latest'
+    container_name: locals-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: locals-database
+      MYSQL_USER: localsuser
+      MYSQL_PASSWORD: localssecure
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - locals-database-data:/var/lib/mysql
 
   locals-service:
     build:
@@ -62,7 +82,7 @@ services:
     container_name: locals-service
     depends_on:
 #      - kafka
-      mysql:
+      locals-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -70,6 +90,24 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8012:8012"
+  
+  booking-database:
+    image: 'mysql:latest'
+    container_name: booking-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: booking-database
+      MYSQL_USER: bookinguser
+      MYSQL_PASSWORD: bookingsecure
+    ports:
+      - "3309:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - booking-database-data:/var/lib/mysql
 
   booking-service:
     build:
@@ -78,7 +116,7 @@ services:
     container_name: booking-service
     depends_on:
 #      - kafka
-      mysql:
+      booking-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -86,6 +124,24 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8013:8013"
+  
+  profiles-database:
+    image: 'mysql:latest'
+    container_name: profiles-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: profiles-database
+      MYSQL_USER: profilesuser
+      MYSQL_PASSWORD: profilessecure
+    ports:
+      - "3310:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - profiles-database-data:/var/lib/mysql
         
   profiles-service:
     build:
@@ -94,7 +150,7 @@ services:
     container_name: profiles-service
     depends_on:
 #      - kafka
-      mysql:
+      profiles-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -102,6 +158,24 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8014:8014"
+  
+  notification-database:
+    image: 'mysql:latest'
+    container_name: notification-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: notification-database
+      MYSQL_USER: notificationuser
+      MYSQL_PASSWORD: notificationsecure
+    ports:
+      - "3311:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - notification-database-data:/var/lib/mysql
         
   notification-service:
     build:
@@ -110,7 +184,7 @@ services:
     container_name: notification-service
     depends_on:
 #      - kafka
-      mysql:
+      notification-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -118,7 +192,25 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8015:8015"
-
+  
+  subscriptions-database:
+    image: 'mysql:latest'
+    container_name: subscriptions-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: subscriptions-database
+      MYSQL_USER: subscriptionsuser
+      MYSQL_PASSWORD: subscriptionssecure
+    ports:
+      - "3312:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - subscriptions-database-data:/var/lib/mysql
+  
   subscriptions-service:
     build:
       context: .
@@ -126,7 +218,7 @@ services:
     container_name: subscriptions-service
     depends_on:
 #      - kafka
-      mysql:
+      subscriptions-database:
         condition: service_healthy
 #    environment:
 #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
@@ -153,4 +245,9 @@ services:
       - "8000:80" 
 
 volumes:
-  mysql-data:
+  iam-database-data:
+  locals-database-data:
+  booking-database-data:
+  profiles-database-data:
+  notification-database-data:
+  subscriptions-database-data:
