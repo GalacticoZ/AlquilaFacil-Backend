@@ -1,5 +1,5 @@
 using ProfilesService.Domain.Model.Aggregates;
-using ProfilesService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace ProfilesService.Domain.Repositories;
 

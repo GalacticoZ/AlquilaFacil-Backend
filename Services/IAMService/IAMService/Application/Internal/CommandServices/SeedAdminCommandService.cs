@@ -1,9 +1,8 @@
 using IAMService.Application.External.OutboundServices;
-using IAMService.Application.Internal.OutboundServices;
 using IAMService.Domain.Model.Commands;
 using IAMService.Domain.Repositories;
 using IAMService.Domain.Services;
-using IAMService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace IAMService.Application.Internal.CommandServices;
 

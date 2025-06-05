@@ -1,5 +1,5 @@
 using IAMService.Domain.Model.Aggregates;
-using IAMService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace IAMService.Domain.Repositories;
 

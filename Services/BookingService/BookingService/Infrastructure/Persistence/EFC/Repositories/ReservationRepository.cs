@@ -1,7 +1,7 @@
 using BookingService.Domain.Model.Aggregates;
 using BookingService.Domain.Repositories;
-using BookingService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using BookingService.Shared.Infrastructure.Persistence.EFC.Repositories;
+using BookingService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingService.Infrastructure.Persistence.EFC.Repositories;

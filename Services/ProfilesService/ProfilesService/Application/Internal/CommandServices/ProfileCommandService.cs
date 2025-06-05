@@ -2,7 +2,7 @@ using ProfilesService.Domain.Model.Aggregates;
 using ProfilesService.Domain.Model.Commands;
 using ProfilesService.Domain.Repositories;
 using ProfilesService.Domain.Services;
-using ProfilesService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace ProfilesService.Application.Internal.CommandServices;
 

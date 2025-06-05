@@ -1,4 +1,3 @@
-using LocalsService.Infraestructure.Persistence.EFC.Repositories;
 using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Model.Queries;
 using LocalsService.Domain.Repositories;

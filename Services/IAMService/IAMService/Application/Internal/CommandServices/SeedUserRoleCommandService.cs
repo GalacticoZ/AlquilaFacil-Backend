@@ -3,7 +3,7 @@ using IAMService.Domain.Model.Entities;
 using IAMService.Domain.Model.ValueObjects;
 using IAMService.Domain.Repositories;
 using IAMService.Domain.Services;
-using IAMService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace IAMService.Application.Internal.CommandServices;
 

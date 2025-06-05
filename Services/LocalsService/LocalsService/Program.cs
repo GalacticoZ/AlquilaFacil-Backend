@@ -4,16 +4,17 @@ using LocalsService.Application.Internal.QueryServices;
 using LocalsService.Domain.Model.Commands;
 using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Services;
-using LocalsService.Infraestructure.Persistence.EFC.Repositories;
 using LocalsService.Interfaces.ACL.Facades;
 using LocalsService.Interfaces.ACL.Facades.Services;
+using LocalsService.Infrastructure.Persistence.EFC.Configuration;
+using LocalsService.Infrastructure.Persistence.EFC.Repositories;
 using LocalsService.Locals.Domain.Services;
-using LocalsService.Shared.Domain.Repositories;
-using LocalsService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using LocalsService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using LocalsService.Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +28,7 @@ var developmentString = builder.Configuration.GetConnectionString("DevelopmentCo
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

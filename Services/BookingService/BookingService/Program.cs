@@ -6,12 +6,13 @@ using BookingService.Domain.Services;
 using BookingService.Infrastructure.Persistence.EFC.Repositories;
 using BookingService.Interfaces.ACL.Facades;
 using BookingService.Interfaces.ACL.Facades.Services;
-using BookingService.Shared.Domain.Repositories;
-using BookingService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using BookingService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using BookingService.Shared.Interfaces.ASP.Configuration;
+using BookingService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ var developmentString = builder.Configuration.GetConnectionString("DevelopmentCo
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

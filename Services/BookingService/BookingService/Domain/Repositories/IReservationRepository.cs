@@ -1,6 +1,6 @@
 using System.Collections;
 using BookingService.Domain.Model.Aggregates;
-using BookingService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace BookingService.Domain.Repositories;
 

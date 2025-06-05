@@ -1,12 +1,8 @@
 using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Repositories;
-using LocalsService.Domain.Model.Entities;
-using LocalsService.Infraestructure.Persistence.EFC.Repositories;
-using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Model.Commands;
-using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Services;
-using LocalsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace LocalsService.Application.Internal.CommandServices;
 

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ProfilesService.Domain.Model.Aggregates;
 using ProfilesService.Domain.Repositories;
-using ProfilesService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using ProfilesService.Shared.Infrastructure.Persistence.EFC.Repositories;
+using ProfilesService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace ProfilesService.Infrastructure.Persistence.EFC.Repositories;
 

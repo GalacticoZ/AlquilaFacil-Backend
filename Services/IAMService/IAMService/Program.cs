@@ -6,17 +6,18 @@ using IAMService.Domain.Model.Commands;
 using IAMService.Domain.Repositories;
 using IAMService.Domain.Services;
 using IAMService.Infrastructure.Hashing.BCrypt.Services;
-using IAMService.Infrastructure.Persistence.EFC.Respositories;
+using IAMService.Infrastructure.Persistence.EFC.Configuration;
+using IAMService.Infrastructure.Persistence.EFC.Repositories;
 using IAMService.Infrastructure.Tokens.JWT.Configuration;
 using IAMService.Infrastructure.Tokens.JWT.Services;
 using IAMService.Interfaces.ACL.Facades;
 using IAMService.Interfaces.ACL.Facades.Service;
-using IAMService.Shared.Domain.Repositories;
-using IAMService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using IAMService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using IAMService.Shared.Interfaces.ASP.Configuration;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ var developmentString = builder.Configuration.GetConnectionString("DevelopmentCo
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

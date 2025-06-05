@@ -1,5 +1,4 @@
-using SubscriptionsService.Domain.Model.Entities;
-using SubscriptionsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 using SubscriptionsService.Domain.Model.Aggregates;
 using SubscriptionsService.Domain.Model.Commands;
 using SubscriptionsService.Domain.Repositories;

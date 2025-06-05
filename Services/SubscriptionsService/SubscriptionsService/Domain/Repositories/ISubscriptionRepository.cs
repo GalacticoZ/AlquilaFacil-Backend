@@ -1,4 +1,4 @@
-using SubscriptionsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 using SubscriptionsService.Domain.Model.Aggregates;
 
 namespace SubscriptionsService.Domain.Repositories;

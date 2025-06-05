@@ -8,10 +8,11 @@ using ProfilesService.Domain.Services;
 using ProfilesService.Infrastructure.Persistence.EFC.Repositories;
 using ProfilesService.Interfaces.ACL;
 using ProfilesService.Interfaces.ACL.Services;
-using ProfilesService.Shared.Domain.Repositories;
-using ProfilesService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using ProfilesService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using ProfilesService.Shared.Interfaces.ASP.Configuration;
+using ProfilesService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +26,7 @@ var developmentString = builder.Configuration.GetConnectionString("DevelopmentCo
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

@@ -1,6 +1,6 @@
 using LocalsService.Domain.Model.Entities;
 using LocalsService.Domain.Model.ValueObjects;
-using LocalsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace LocalsService.Domain.Repositories;
 

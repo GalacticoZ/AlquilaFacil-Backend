@@ -5,10 +5,11 @@ using NotificationService.Application.Internal.QueryServices;
 using NotificationService.Domain.Repositories;
 using NotificationService.Domain.Services;
 using NotificationService.Infrastructure.Persistence.EFC.Repositories;
-using NotificationService.Shared.Domain.Repositories;
-using NotificationService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using NotificationService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using NotificationService.Shared.Interfaces.ASP.Configuration;
+using NotificationService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,7 +21,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

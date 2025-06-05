@@ -1,5 +1,5 @@
+using Shared.Domain.Repositories;
 using SubscriptionsService.Application.External.OutboundServices;
-using SubscriptionsService.Shared.Domain.Repositories;
 using SubscriptionsService.Domain.Model.Aggregates;
 using SubscriptionsService.Domain.Model.Commands;
 using SubscriptionsService.Domain.Repositories;

@@ -1,11 +1,11 @@
-using SubscriptionsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 using SubscriptionsService.Domain.Model.Commands;
 using SubscriptionsService.Domain.Model.Entities;
 using SubscriptionsService.Domain.Model.ValueObjects;
 using SubscriptionsService.Domain.Repositories;
 using SubscriptionsService.Domain.Services;
 
-namespace SubscriptionsService.Subscriptions.Application.Internal.CommandServices;
+namespace SubscriptionsService.Application.Internal.CommandServices;
 
 public class SubscriptionStatusCommandService(ISubscriptionStatusRepository subscriptionStatusRepository, IUnitOfWork unitOfWork) : ISubscriptionStatusCommandService
 {

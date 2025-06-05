@@ -1,19 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Shared.Domain.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ASP.Configuration;
 using SubscriptionsService.Application.Internal.CommandServices;
 using SubscriptionsService.Application.Internal.QueryServices;
 using SubscriptionsService.Domain.Repositories;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Infrastructure.Persistence.EFC.Repositories;
-using SubscriptionsService.Shared.Domain.Repositories;
-using SubscriptionsService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using SubscriptionsService.Shared.Infrastructure.Persistence.EFC.Repositories;
-using SubscriptionsService.Shared.Interfaces.ASP.Configuration;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using SubscriptionsService.Infrastructure.Persistence.EFC.Configuration;
 using SubscriptionsService.Application.External.OutboundServices;
 using SubscriptionsService.Domain.Model.Commands;
 using SubscriptionsService.Interfaces.ACL.Facades;
 using SubscriptionsService.Interfaces.ACL.Facades.Services;
-using SubscriptionsService.Subscriptions.Application.Internal.CommandServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +27,7 @@ var developmentString = builder.Configuration.GetConnectionString("DevelopmentCo
 
 // Configure Database Context and Logging Levels
 
-builder.Services.AddDbContext<AppDbContext>(
+builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
         if (builder.Environment.IsDevelopment())

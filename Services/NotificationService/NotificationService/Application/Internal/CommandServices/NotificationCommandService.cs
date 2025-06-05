@@ -2,7 +2,7 @@ using NotificationService.Domain.Models.Aggregates;
 using NotificationService.Domain.Models.Commands;
 using NotificationService.Domain.Repositories;
 using NotificationService.Domain.Services;
-using NotificationService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace NotificationService.Application.Internal.CommandServices;
 

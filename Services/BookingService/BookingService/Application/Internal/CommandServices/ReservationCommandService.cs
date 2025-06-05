@@ -1,10 +1,9 @@
 using BookingService.Domain.Services;
 using BookingService.Application.External.OutboundServices;
-using BookingService.Application.External.OutboundServices;
 using BookingService.Domain.Model.Aggregates;
 using BookingService.Domain.Model.Commands;
 using BookingService.Domain.Repositories;
-using BookingService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace BookingService.Application.Internal.CommandServices;
 

@@ -1,8 +1,7 @@
-using SubscriptionsService.Domain.Model.Entities;
-using SubscriptionsService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using SubscriptionsService.Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
 using SubscriptionsService.Domain.Model.Aggregates;
 using SubscriptionsService.Domain.Repositories;
+using SubscriptionsService.Infrastructure.Persistence.EFC.Configuration;
 
 namespace SubscriptionsService.Infrastructure.Persistence.EFC.Repositories;
 

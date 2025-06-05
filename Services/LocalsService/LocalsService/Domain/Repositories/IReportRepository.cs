@@ -1,5 +1,5 @@
 using LocalsService.Domain.Model.Aggregates;
-using LocalsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace LocalsService.Domain.Repositories;
 

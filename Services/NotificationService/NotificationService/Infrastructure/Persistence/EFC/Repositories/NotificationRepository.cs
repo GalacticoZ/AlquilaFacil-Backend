@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using NotificationService.Domain.Models.Aggregates;
 using NotificationService.Domain.Repositories;
-using NotificationService.Shared.Infrastructure.Persistence.EFC.Configuration;
-using NotificationService.Shared.Infrastructure.Persistence.EFC.Repositories;
+using NotificationService.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Infrastructure.Persistence.EFC.Repositories;
 
 namespace NotificationService.Infrastructure.Persistence.EFC.Repositories;
 

@@ -1,5 +1,5 @@
 using NotificationService.Domain.Models.Aggregates;
-using NotificationService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace NotificationService.Domain.Repositories;
 

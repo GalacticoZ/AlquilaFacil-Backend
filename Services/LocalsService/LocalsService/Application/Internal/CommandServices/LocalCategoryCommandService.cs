@@ -5,7 +5,7 @@ using LocalsService.Domain.Model.Entities;
 using LocalsService.Domain.Model.ValueObjects;
 using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Services;
-using LocalsService.Shared.Domain.Repositories;
+using Shared.Domain.Repositories;
 
 namespace LocalsService.Application.Internal.CommandServices;
 
