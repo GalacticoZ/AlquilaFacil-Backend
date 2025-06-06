@@ -3,41 +3,42 @@ using BookingService.Application.External.OutboundServices;
 using BookingService.Domain.Model.Aggregates;
 using BookingService.Domain.Model.Commands;
 using BookingService.Domain.Repositories;
+using Shared.Application.External.OutboundServices;
 using Shared.Domain.Repositories;
 
 namespace BookingService.Application.Internal.CommandServices;
 
 public class ReservationCommandService(
- IUserReservationExternalService userReservationExternalService,
+ IUserExternalService userExternalService,
  IReservationLocalExternalService reservationLocalExternalService, 
- INotificationReservationExternalService notificationReservationExternalService,
+ //INotificationReservationExternalService notificationReservationExternalService,
  IReservationRepository reservationRepository,
  IUnitOfWork unitOfWork) : IReservationCommandService
 {
  public async Task<Reservation> Handle(CreateReservationCommand reservation)
  {
-     var userExists = await userReservationExternalService.UserExists(reservation.UserId);
+     var userExists = await userExternalService.UserExists(reservation.UserId);
      if (!userExists)
      {
-         throw new Exception("User does not exist");
+         throw new KeyNotFoundException("User does not exist");
      }
 
      var localExists = await reservationLocalExternalService.LocalReservationExists(reservation.LocalId);
      if (!localExists)
      {
-         throw new Exception("Local does not exist");
+         throw new KeyNotFoundException("Local does not exist");
      }
      if(reservation.StartDate > reservation.EndDate)
      {
-         throw new Exception("Start date must be less than end date");
+         throw new BadHttpRequestException("Start date must be less than end date");
      }
      if (reservation.StartDate.Year < DateTime.Now.Year || reservation.StartDate.Month < DateTime.Now.Month || reservation.StartDate.Day < DateTime.Now.Day)
      {
-         throw new Exception("Start date must be greater than current date");
+         throw new BadHttpRequestException("Start date must be greater than current date");
      }
      if (reservation.EndDate.Year < DateTime.Now.Year || reservation.EndDate.Month < DateTime.Now.Month || reservation.EndDate.Day < DateTime.Now.Day)
      {
-         throw new Exception("End date must be greater than current date");
+         throw new BadHttpRequestException("End date must be greater than current date");
      }
 
      if (await reservationLocalExternalService.IsLocalOwner(reservation.UserId, reservation.LocalId))
@@ -66,21 +67,21 @@ public class ReservationCommandService(
  {
      if(reservation.StartDate > reservation.EndDate)
      {
-         throw new Exception("Start date must be less than end date");
+         throw new BadHttpRequestException("Start date must be less than end date");
      }
      if (reservation.StartDate.Year < DateTime.Now.Year || reservation.StartDate.Month < DateTime.Now.Month || reservation.StartDate.Day < DateTime.Now.Day)
      {
-            throw new Exception("Start date must be greater than current date");
+         throw new BadHttpRequestException("Start date must be greater than current date");
      }
      if (reservation.EndDate < DateTime.Now)
      {
-         throw new Exception("End date must be greater than current date");
+         throw new BadHttpRequestException("End date must be greater than current date");
      }
 
      var reservationToUpdate = await reservationRepository.FindByIdAsync(reservation.Id);
         if (reservationToUpdate == null)
         {
-            throw new Exception("Reservation does not exist");
+            throw new KeyNotFoundException("Reservation does not exist");
         }
         reservationToUpdate.UpdateDate(reservation);
         reservationRepository.Update(reservationToUpdate);
@@ -93,7 +94,7 @@ public class ReservationCommandService(
      var reservationToDelete = await reservationRepository.FindByIdAsync(reservation.Id);
      if (reservationToDelete == null)
      {
-         throw new Exception("Reservation does not exist");
+         throw new KeyNotFoundException("Reservation does not exist");
      }
 
      reservationRepository.Remove(reservationToDelete);

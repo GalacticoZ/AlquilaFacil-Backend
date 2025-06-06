@@ -34,7 +34,7 @@ public class LocalCategoryCommandService(ILocalCategoryRepository localCategoryR
 
                 if (!imageUrls.TryGetValue(type, out var photoUrl))
                 {
-                    throw new Exception("Invalid local category type");
+                    throw new BadHttpRequestException("Invalid local category type");
                 }
 
                 var localCategory = new LocalCategory(attributeDescription, photoUrl);

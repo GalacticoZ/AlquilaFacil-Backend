@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Application.External.OutboundServices;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ACL.Facades;
+using Shared.Interfaces.ACL.Facades.Services;
 using Shared.Interfaces.ASP.Configuration;
 using SubscriptionsService.Application.Internal.CommandServices;
 using SubscriptionsService.Application.Internal.QueryServices;
@@ -10,10 +13,7 @@ using SubscriptionsService.Domain.Repositories;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Infrastructure.Persistence.EFC.Repositories;
 using SubscriptionsService.Infrastructure.Persistence.EFC.Configuration;
-using SubscriptionsService.Application.External.OutboundServices;
 using SubscriptionsService.Domain.Model.Commands;
-using SubscriptionsService.Interfaces.ACL.Facades;
-using SubscriptionsService.Interfaces.ACL.Facades.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,7 +69,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/subscriptions"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -100,7 +105,7 @@ builder.Services.AddScoped<ISubscriptionQueryServices, SubscriptionQueryService>
 builder.Services.AddScoped<ISubscriptionStatusRepository, SubscriptionStatusRepository>();
 builder.Services.AddScoped<ISubscriptionStatusCommandService, SubscriptionStatusCommandService>();
 builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
-builder.Services.AddScoped<IExternalUserWithSubscriptionService, ExternalUserWithSubscriptionService>();
+builder.Services.AddScoped<IUserExternalService, UserExternalService>();
 
 builder.Services.AddScoped<ISeedSubscriptionPlanCommandService, SeedSubscriptionPlanCommandService>();
 

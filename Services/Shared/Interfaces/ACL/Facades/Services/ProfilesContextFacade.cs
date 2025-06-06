@@ -1,4 +1,4 @@
-using IAMService.Interfaces.ACL.Facades;
+using ProfilesService.Interfaces.ACL;
 
 namespace IAMService.Interfaces.ACL.Facades.Service;
 
@@ -14,7 +14,7 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
         int userId
     )
     {
-        var endpoint = "http://localhost:5274/api/v1/profiles";
+        var endpoint = "http://profiles-service:8014/api/v1/profiles";
 
         var profileData = new
         {
@@ -52,7 +52,7 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
         int userId
     )
     {
-        var endpoint = $"http://localhost:5274/api/v1/profiles/{userId}";
+        var endpoint = $"http://profiles-service:8014/api/v1/profiles/{userId}";
 
         var profileData = new
         {

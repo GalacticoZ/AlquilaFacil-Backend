@@ -61,7 +61,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/notification"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

@@ -21,7 +21,7 @@ public class NotificationCommandService(IUnitOfWork unitOfWork, INotificationRep
         var notification = await notificationRepository.FindByIdAsync(command.Id);
         if (notification == null)
         {
-            throw new Exception("Notification not found");
+            throw new KeyNotFoundException("Notification not found");
         }
         notificationRepository.Remove(notification);
         await unitOfWork.CompleteAsync();

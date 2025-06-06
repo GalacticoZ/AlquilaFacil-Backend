@@ -12,7 +12,7 @@ public class PlanCommandService(IPlanRepository planRepository, IUnitOfWork unit
     {
         if (command.Price <= 0)
         {
-            throw new Exception("Plan price cannot be negative or less than 0");
+            throw new BadHttpRequestException("Plan price cannot be negative or less than 0");
         }
         var plan = new Plan(command.Name, command.Service, command.Price);
         await planRepository.AddAsync(plan);

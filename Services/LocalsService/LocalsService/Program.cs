@@ -1,19 +1,19 @@
-using LocalsService.Application.External.OutboundServices;
 using LocalsService.Application.Internal.CommandServices;
 using LocalsService.Application.Internal.QueryServices;
 using LocalsService.Domain.Model.Commands;
 using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Services;
-using LocalsService.Interfaces.ACL.Facades;
-using LocalsService.Interfaces.ACL.Facades.Services;
 using LocalsService.Infrastructure.Persistence.EFC.Configuration;
 using LocalsService.Infrastructure.Persistence.EFC.Repositories;
 using LocalsService.Locals.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Application.External.OutboundServices;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
+using Shared.Interfaces.ACL.Facades;
+using Shared.Interfaces.ACL.Facades.Services;
 using Shared.Interfaces.ASP.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -70,7 +70,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/locals"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -105,7 +110,7 @@ builder.Services.AddScoped<IReportCommandService, ReportCommandService>();
 builder.Services.AddScoped<IReportQueryService, ReportQueryService>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
-builder.Services.AddScoped<IUserCommentExternalService, UserCommentExternalService>();
+builder.Services.AddScoped<IUserExternalService, UserExternalService>();
 builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 
 builder.Services.AddHttpClient();

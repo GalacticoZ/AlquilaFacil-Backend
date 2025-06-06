@@ -1,4 +1,4 @@
-namespace BookingService.Interfaces.ACL.Facades;
+namespace Shared.Interfaces.ACL.Facades;
 
 public interface IIamContextFacade
 {

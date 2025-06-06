@@ -14,7 +14,7 @@ public class InvoiceCommandService(
     {
         if (command.Amount <= 0)
         {
-            throw new Exception("Invoice amount cannot be negative or less than 0");
+            throw new BadHttpRequestException("Invoice amount cannot be negative or less than 0");
         }
         var invoice = new Invoice(command.SubscriptionId, command.Amount, command.Date);
         await invoiceRepository.AddAsync(invoice);

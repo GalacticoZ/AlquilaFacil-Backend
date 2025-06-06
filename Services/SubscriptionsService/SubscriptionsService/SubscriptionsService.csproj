@@ -26,11 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\External\" />
-      <Folder Include="Interfaces\ACL\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>

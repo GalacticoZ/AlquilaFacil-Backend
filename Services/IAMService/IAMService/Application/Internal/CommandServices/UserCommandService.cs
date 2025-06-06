@@ -22,7 +22,7 @@ public class UserCommandService(
 
         if (user == null || !hashingService.VerifyPassword(command.Password, user.PasswordHash) ||
             !command.Email.Contains('@'))
-            throw new Exception("Invalid email or password");
+            throw new KeyNotFoundException("Invalid email or password");
 
         var token = tokenService.GenerateToken(user);
 
@@ -34,17 +34,17 @@ public class UserCommandService(
         const string symbols = "!@#$%^&*()_-+=[{]};:>|./?";
         if (command.Password.Length < 8 || !command.Password.Any(char.IsDigit) || !command.Password.Any(char.IsUpper) ||
             !command.Password.Any(char.IsLower) || !command.Password.Any(c => symbols.Contains(c)))
-            throw new Exception(
+            throw new BadHttpRequestException(
                 "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit and one special character");
         
         if(!command.Email.Contains('@'))
-            throw new Exception("Invalid email address");
+            throw new BadHttpRequestException("Invalid email address");
         
         if (command.Phone.Length < 9)
-            throw new Exception("Phone number must to be valid");
+            throw new BadHttpRequestException("Phone number must to be valid");
 
         if (await userRepository.ExistsByUsername(command.Username))
-            throw new Exception($"Username {command.Username} is already taken");
+            throw new BadHttpRequestException($"Username {command.Username} is already taken");
 
         var hashedPassword = hashingService.HashPassword(command.Password);
         var user = new User(command.Username, hashedPassword, command.Email);
@@ -77,11 +77,11 @@ public class UserCommandService(
     {
         var userToUpdate = await userRepository.FindByIdAsync(command.Id);
         if (userToUpdate == null)
-            throw new Exception("User not found");
+            throw new KeyNotFoundException("User not found");
         var userExists = await userRepository.ExistsByUsername(command.Username);
         if (userExists)
         {
-            throw new Exception("This username already exists");
+            throw new BadHttpRequestException("This username already exists");
         }
 
         userToUpdate.UpdateUsername(command.Username);

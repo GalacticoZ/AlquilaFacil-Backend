@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using ProfilesService.Domain.Model.Aggregates;
 using ProfilesService.Domain.Model.Queries;
 using ProfilesService.Domain.Services;
 using ProfilesService.Interfaces.REST.Resources;
@@ -15,6 +16,16 @@ public class ProfilesController(
     IProfileQueryService profileQueryService)
     : ControllerBase
 {
+    [HttpPost]
+    public async Task<IActionResult> CreateProfile(CreateProfileResource resource)
+    {
+        var createProfileCommand = CreateProfileCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var profile = await profileCommandService.Handle(createProfileCommand);
+        if (profile is null) return BadRequest();
+        var profileResource = ProfileResourceFromEntityAssembler.ToResourceFromEntity(profile);
+        return StatusCode(201, profileResource);
+    }
+    
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetProfileByUserId(int userId)
     {
@@ -24,15 +35,7 @@ public class ProfilesController(
         return Ok(profileResource);
     }
     
-
-    [HttpPut("{userId}")]
-    public async Task<ActionResult> UpdateProfile(int userId, [FromBody] UpdateProfileResource updateProfileResource)
-    {
-        var updateProfileCommand = UpdateProfileCommandFromResourceAssembler.ToCommandFromResource(userId, updateProfileResource);
-        var result = await profileCommandService.Handle(updateProfileCommand);
-        return Ok(ProfileResourceFromEntityAssembler.ToResourceFromEntity(result));
-    }
-    
+        
     [HttpGet("bank-accounts/{userId}")]
     public async Task<IActionResult> GetProfileBankAccountsByUserId(int userId)
     {
@@ -40,4 +43,13 @@ public class ProfilesController(
         var bankAccounts = await profileQueryService.Handle(query);
         return Ok(bankAccounts);
     }
+    
+    [HttpPut("{userId}")]
+    public async Task<ActionResult> UpdateProfile(int userId, [FromBody] UpdateProfileResource updateProfileResource)
+    {
+        var updateProfileCommand = UpdateProfileCommandFromResourceAssembler.ToCommandFromResource(userId, updateProfileResource);
+        var result = await profileCommandService.Handle(updateProfileCommand);
+        return Ok(ProfileResourceFromEntityAssembler.ToResourceFromEntity(result));
+    }
+
 }

@@ -4,15 +4,16 @@ using BookingService.Application.Internal.QueryServices;
 using BookingService.Domain.Repositories;
 using BookingService.Domain.Services;
 using BookingService.Infrastructure.Persistence.EFC.Repositories;
-using BookingService.Interfaces.ACL.Facades;
-using BookingService.Interfaces.ACL.Facades.Services;
 using BookingService.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Shared.Application.External.OutboundServices;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
+using Shared.Interfaces.ACL.Facades;
+using Shared.Interfaces.ACL.Facades.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,7 +69,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/booking"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -99,13 +105,11 @@ builder.Services.AddScoped<IReservationQueryService, ReservationQueryService>();
 
 builder.Services.AddScoped<IReservationLocalExternalService, ReservationLocalExternalService>();
 builder.Services.AddScoped<ISubscriptionInfoExternalService, SubscriptionInfoExternalService>();
-builder.Services.AddScoped<IUserReservationExternalService, UserReservationExternalService>();
-builder.Services.AddScoped<INotificationReservationExternalService, NotificationReservationExternalService>();
+builder.Services.AddScoped<IUserExternalService, UserExternalService>();
 
 builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 builder.Services.AddScoped<ILocalsContextFacade, LocalsContextFacade>();
 builder.Services.AddScoped<ISubscriptionContextFacade, SubscriptionContextFacade>();
-builder.Services.AddScoped<INotificationsContextFacade, NotificationsContextFacade>();
 
 builder.Services.AddHttpClient();
 

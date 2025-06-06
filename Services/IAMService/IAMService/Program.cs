@@ -10,13 +10,13 @@ using IAMService.Infrastructure.Persistence.EFC.Configuration;
 using IAMService.Infrastructure.Persistence.EFC.Repositories;
 using IAMService.Infrastructure.Tokens.JWT.Configuration;
 using IAMService.Infrastructure.Tokens.JWT.Services;
-using IAMService.Interfaces.ACL.Facades;
 using IAMService.Interfaces.ACL.Facades.Service;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using ProfilesService.Interfaces.ACL;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -73,7 +73,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/iam"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -99,7 +104,6 @@ builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IHashingService, HashingService>();
-builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 builder.Services.AddScoped<IProfilesUserExternalService, ProfilesUserExternalService>();
 builder.Services.AddScoped<IProfilesContextFacade, ProfilesContextFacade>();
 

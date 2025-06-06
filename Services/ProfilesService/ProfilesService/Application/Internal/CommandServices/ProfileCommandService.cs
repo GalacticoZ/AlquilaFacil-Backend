@@ -21,7 +21,7 @@ public class ProfileCommandService(IProfileRepository profileRepository, IUnitOf
         var profile = await profileRepository.FindByUserIdAsync(command.UserId);
         if (profile == null)
         {
-            throw new Exception("Profile with User ID does not exist");
+            throw new KeyNotFoundException("Profile with User ID does not exist");
         }
         profile.Update(command);
         await unitOfWork.CompleteAsync();

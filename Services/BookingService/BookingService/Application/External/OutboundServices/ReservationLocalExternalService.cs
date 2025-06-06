@@ -1,6 +1,5 @@
-using BookingService.Application.External.OutboundServices;
-using BookingService.Interfaces.ACL.DTOs;
-using BookingService.Interfaces.ACL.Facades;
+using Shared.Interfaces.ACL.DTOs;
+using Shared.Interfaces.ACL.Facades;
 
 namespace BookingService.Application.External.OutboundServices;
 

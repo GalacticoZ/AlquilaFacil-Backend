@@ -1,4 +1,4 @@
-namespace BookingService.Interfaces.ACL.DTOs;
+namespace Shared.Interfaces.ACL.DTOs;
 
 public class SubscriptionDTO
 {

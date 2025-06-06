@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ProfilesService.Application.Internal.CommandServices;
@@ -6,8 +5,6 @@ using ProfilesService.Application.Internal.QueryServices;
 using ProfilesService.Domain.Repositories;
 using ProfilesService.Domain.Services;
 using ProfilesService.Infrastructure.Persistence.EFC.Repositories;
-using ProfilesService.Interfaces.ACL;
-using ProfilesService.Interfaces.ACL.Services;
 using ProfilesService.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
@@ -68,7 +65,12 @@ builder.Services.AddSwaggerGen(
                     Name = "Apache 2.0",
                     Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
                 }
-            });
+            }
+        );
+        c.AddServer(new OpenApiServer
+        {
+            Url = builder.Environment.IsDevelopment() ? "/" : "/profiles"
+        });
     });
 
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -88,7 +90,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IProfileCommandService, ProfileCommandService>();
 builder.Services.AddScoped<IProfileQueryService, ProfileQueryService>();
-builder.Services.AddScoped<IProfilesContextFacade, ProfilesContextFacade>();
 
 builder.Services.AddHttpClient();
 builder.WebHost.UseKestrel(options =>

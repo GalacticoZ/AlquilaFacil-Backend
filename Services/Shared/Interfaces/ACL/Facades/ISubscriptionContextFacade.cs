@@ -1,6 +1,6 @@
-using BookingService.Interfaces.ACL.DTOs;
+using Shared.Interfaces.ACL.DTOs;
 
-namespace BookingService.Interfaces.ACL.Facades;
+namespace Shared.Interfaces.ACL.Facades;
 
 public interface ISubscriptionContextFacade
 {

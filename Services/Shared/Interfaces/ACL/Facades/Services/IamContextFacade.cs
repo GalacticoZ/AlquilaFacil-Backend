@@ -1,12 +1,13 @@
-using LocalsService.Interfaces.ACL.Facades;
+using System.Text.Json;
+using Shared.Interfaces.ACL.Facades;
 
-namespace LocalsService.Interfaces.ACL.Facades.Services;
+namespace Shared.Interfaces.ACL.Facades.Services;
 
 public class IamContextFacade(HttpClient httpClient) : IIamContextFacade
 {
     public async Task<bool> UserExists(int userId)
     {
-        var endpoint = $"http://localhost:5271/api/v1/users/user-exists/{userId}";
+        var endpoint = $"http://iam-service:8011/api/v1/users/user-exists/{userId}";
         var response = await httpClient.GetAsync(endpoint);
 
         if (response.IsSuccessStatusCode)

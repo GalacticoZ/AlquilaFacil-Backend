@@ -1,4 +1,4 @@
-using BookingService.Interfaces.ACL.DTOs;
+using Shared.Interfaces.ACL.DTOs;
 
 namespace BookingService.Application.External.OutboundServices;
 
