@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
 using ProfilesService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Model.Commands;
@@ -5,54 +6,110 @@ using SubscriptionsService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Interfaces.REST.Resources;
 using SubscriptionsService.Interfaces.REST.Transform;
+using Shared.Interfaces.REST.Resources;
 
 namespace SubscriptionsService.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
 public class SubscriptionsController(
     ISubscriptionCommandService subscriptionCommandService,
     ISubscriptionQueryServices subscriptionQueryServices)
     : ControllerBase
 {
     [HttpPost]
+    [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateSubscription(
         [FromBody] CreateSubscriptionResource createSubscriptionResource)
     {
-        var createSubscriptionCommand =
-            CreateSubscriptionCommandFromResourceAssembler.ToCommandFromResource(createSubscriptionResource);
-        var subscription = await subscriptionCommandService.Handle(createSubscriptionCommand);
-        if (subscription is null) return BadRequest();
-        var resource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
-        
-        return StatusCode(201, resource);
+        try
+        {
+            var createSubscriptionCommand =
+                CreateSubscriptionCommandFromResourceAssembler.ToCommandFromResource(createSubscriptionResource);
+            var subscription = await subscriptionCommandService.Handle(createSubscriptionCommand);
+            if (subscription is null) return BadRequest(new { Error = "Failed to create subscription" });
+            var resource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
+            return StatusCode(201, resource);
+        }
+        catch (BadHttpRequestException ex)
+        {
+            return BadRequest(new { Error = ex.Message }); // 400
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+        }
     }
     
     [HttpGet]
+    [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllSubscriptions()
     {
-        var getAllSubscriptionsQuery = new GetAllSubscriptionsQuery();
-        var subscriptions = await subscriptionQueryServices.Handle(getAllSubscriptionsQuery);
-        var resources = subscriptions.Select(SubscriptionResourceFromEntityAssembler.ToResourceFromEntity);
-        return Ok(resources);
+        try
+        {
+            var getAllSubscriptionsQuery = new GetAllSubscriptionsQuery();
+            var subscriptions = await subscriptionQueryServices.Handle(getAllSubscriptionsQuery);
+            var resources = subscriptions.Select(SubscriptionResourceFromEntityAssembler.ToResourceFromEntity);
+            return Ok(resources);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
     }
     
     [HttpGet("status/{userId}")]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSubscriptionStatusByUserId([FromRoute] int userId)
     {
-        var getSubscriptionStatusByUserIdQuery = new GetSubscriptionStatusByUserIdQuery(userId);
-        var subscriptionStatus = await subscriptionQueryServices.Handle(getSubscriptionStatusByUserIdQuery);
-        return Ok(subscriptionStatus);
+        try
+        {
+            var getSubscriptionStatusByUserIdQuery = new GetSubscriptionStatusByUserIdQuery(userId);
+            var subscriptionStatus = await subscriptionQueryServices.Handle(getSubscriptionStatusByUserIdQuery);
+            return Ok(subscriptionStatus);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
     }
 
     [HttpPut("{subscriptionId}")]
+    [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ActiveSubscriptionStatus(int subscriptionId)
     {
-        var activeSubscriptionStatusCommand = new ActiveSubscriptionStatusCommand(subscriptionId);
-        var subscription = await subscriptionCommandService.Handle(activeSubscriptionStatusCommand);
-        if (subscription == null) return NotFound();
-        var resource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
-        return Ok(resource);
+        try
+        {
+            var activeSubscriptionStatusCommand = new ActiveSubscriptionStatusCommand(subscriptionId);
+            var subscription = await subscriptionCommandService.Handle(activeSubscriptionStatusCommand);
+            if (subscription == null) return NotFound(new { Error = "Subscription not found" });
+            var resource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
+            return Ok(resource);
+        }
+        catch (BadHttpRequestException ex)
+        {
+            return BadRequest(new { Error = ex.Message }); // 400
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+        }
     }
-   
 }
