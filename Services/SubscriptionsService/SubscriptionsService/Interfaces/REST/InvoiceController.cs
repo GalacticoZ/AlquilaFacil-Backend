@@ -4,6 +4,7 @@ using SubscriptionsService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Interfaces.REST.Resources;
 using SubscriptionsService.Interfaces.REST.Transform;
+using Shared.Interfaces.REST.Resources;
 
 namespace SubscriptionsService.Interfaces.REST;
 
@@ -16,30 +17,67 @@ public class InvoiceController(
     : ControllerBase
 {
     [HttpPost]
+    [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateInvoice([FromBody] CreateInvoiceResource createInvoiceResource)
     {
-        var createInvoiceCommand =
-            CreateInvoiceCommandFromResourceAssembler.ToCommandFromResource(createInvoiceResource);
-        var invoice = await invoiceCommandService.Handle(createInvoiceCommand);
-        if (invoice is null) return BadRequest();
-        var resource = InvoiceResourceFromEntityAssembler.ToResourceFromEntity(invoice);
-        return Ok(resource);
+        try
+        {
+            var createInvoiceCommand =
+                CreateInvoiceCommandFromResourceAssembler.ToCommandFromResource(createInvoiceResource);
+            var invoice = await invoiceCommandService.Handle(createInvoiceCommand);
+            if (invoice is null) return BadRequest(new { Error = "Failed to create invoice" });
+            var resource = InvoiceResourceFromEntityAssembler.ToResourceFromEntity(invoice);
+            return Ok(resource);
+        }
+        catch (BadHttpRequestException ex)
+        {
+            return BadRequest(new { Error = ex.Message }); // 400
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+        }
     }
     
     [HttpGet]
+    [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoices()
     {
-        var invoices = await invoiceQueryService.Handle(new GetAllInvoicesQuery());
-        var resource = invoices.Select(InvoiceResourceFromEntityAssembler.ToResourceFromEntity);
-        return Ok(resource);
+        try
+        {
+            var invoices = await invoiceQueryService.Handle(new GetAllInvoicesQuery());
+            var resource = invoices.Select(InvoiceResourceFromEntityAssembler.ToResourceFromEntity);
+            return Ok(resource);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
     }
     
     [HttpGet("{invoiceId}")]
+    [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoiceById(int invoiceId)
     {
-        var invoice = await invoiceQueryService.Handle(new GetInvoiceByIdQuery(invoiceId));
-        if (invoice is null) return NotFound();
-        var resource = InvoiceResourceFromEntityAssembler.ToResourceFromEntity(invoice);
-        return Ok(resource);
+        try
+        {
+            var invoice = await invoiceQueryService.Handle(new GetInvoiceByIdQuery(invoiceId));
+            if (invoice is null) return NotFound(new { Error = "Invoice not found" });
+            var resource = InvoiceResourceFromEntityAssembler.ToResourceFromEntity(invoice);
+            return Ok(resource);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
     }
 }
