@@ -4,6 +4,7 @@ using IAMService.Infrastructure.Pipeline.Middleware.Attributes;
 using IAMService.Interfaces.REST.Resources;
 using IAMService.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Interfaces.REST.Resources;
 
 namespace IAMService.Interfaces.REST;
 
@@ -13,7 +14,6 @@ namespace IAMService.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 public class AuthenticationController(IUserCommandService userCommandService) : ControllerBase
 {
-
     /**
      * <summary>
      *     Sign in endpoint. It allows to authenticate a user
@@ -23,14 +23,34 @@ public class AuthenticationController(IUserCommandService userCommandService) : 
      */
     [HttpPost("sign-in")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(AuthenticatedUserResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> SignIn([FromBody] SignInResource signInResource)
     {
-        var signInCommand = SignInCommandFromResourceAssembler.ToCommandFromResource(signInResource);
-        var authenticatedUser = await userCommandService.Handle(signInCommand);
-        var resource =
-            AuthenticatedUserResourceFromEntityAssembler.ToResourceFromEntity(authenticatedUser.user,
-                authenticatedUser.token);
-        return Ok(resource);
+        try
+        {
+            var signInCommand = SignInCommandFromResourceAssembler.ToCommandFromResource(signInResource);
+            var authenticatedUser = await userCommandService.Handle(signInCommand);
+            if (authenticatedUser.user is null) return BadRequest(new { Error = "Authentication failed" });
+            var resource =
+                AuthenticatedUserResourceFromEntityAssembler.ToResourceFromEntity(authenticatedUser.user,
+                    authenticatedUser.token);
+            return Ok(resource);
+        }
+        catch (BadHttpRequestException ex)
+        {
+            return BadRequest(new { Error = ex.Message }); // 400
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+        }
     }
 
     /**
@@ -42,10 +62,29 @@ public class AuthenticationController(IUserCommandService userCommandService) : 
      */
     [HttpPost("sign-up")]
     [AllowAnonymous]
+    [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> SignUp([FromBody] SignUpResource signUpResource)
     {
-        var signUpCommand = SignUpCommandFromResourceAssembler.ToCommandFromResource(signUpResource);
-        await userCommandService.Handle(signUpCommand);
-        return Ok(new { message = "User created successfully"});
+        try
+        {
+            var signUpCommand = SignUpCommandFromResourceAssembler.ToCommandFromResource(signUpResource);
+            await userCommandService.Handle(signUpCommand);
+            return Ok(new { message = "User created successfully"});
+        }
+        catch (BadHttpRequestException ex)
+        {
+            return BadRequest(new { Error = ex.Message }); // 400
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+        }
     }
 }
