@@ -9,15 +9,12 @@ using Shared.Interfaces.REST.Resources;
 
 namespace IAMService.Interfaces.REST;
 
-/**
- * <summary>
- *     The users controller
- * </summary>
- * <remarks>
- *     This class is used to handle user requests
- * </remarks>
- */
-
+/// <summary>
+/// The users controller
+/// </summary>
+/// <remarks>
+/// This class is used to handle user requests
+/// </remarks>
 [Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
@@ -26,13 +23,13 @@ public class UsersController(
     IUserQueryService userQueryService, IUserCommandService userCommandService
     ) : ControllerBase
 {
-    /**
-     * <summary>
-     *     Get user by id endpoint. It allows to get a user by id
-     * </summary>
-     * <param name="userId">The user id</param>
-     * <returns>The user resource</returns>
-     */
+    /// <summary>
+    /// Get user by id endpoint. It allows to get a user by id
+    /// </summary>
+    /// <param name="userId">The user id</param>
+    /// <returns>The user resource</returns>
+    /// <response code="200">Usuario obtenido exitosamente</response>
+    /// <response code="404">Usuario no encontrado</response>
     //[AuthorizeRole(EUserRoles.Admin)]
     [HttpGet("{userId:int}")]
     [AllowAnonymous]
@@ -54,12 +51,12 @@ public class UsersController(
         }
     }
     
-    /**
-     * <summary>
-     *     Get all users endpoint. It allows to get all users
-     * </summary>
-     * <returns>The user resources</returns>
-     */
+    /// <summary>
+    /// Get all users endpoint. It allows to get all users
+    /// </summary>
+    /// <returns>The user resources</returns>
+    /// <response code="200">Usuarios obtenidos exitosamente</response>
+    /// <response code="404">No se encontraron usuarios</response>
     [HttpGet]
     //[AuthorizeRole(EUserRoles.Admin)]
     [AllowAnonymous]
@@ -80,6 +77,13 @@ public class UsersController(
         }
     }
     
+    /// <summary>
+    /// Endpoint GET para obtener nombre de usuario por ID
+    /// </summary>
+    /// <param name="userId">ID del usuario</param>
+    /// <returns>Nombre del usuario</returns>
+    /// <response code="200">Nombre de usuario obtenido exitosamente</response>
+    /// <response code="404">Usuario no encontrado</response>
     [HttpGet("get-username/{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -98,6 +102,16 @@ public class UsersController(
         }
     }
     
+    /// <summary>
+    /// Endpoint PUT para actualizar un usuario
+    /// </summary>
+    /// <param name="userId">ID del usuario a actualizar</param>
+    /// <param name="updateUsernameResource">Datos actualizados del usuario</param>
+    /// <returns>Usuario actualizado</returns>
+    /// <response code="200">Usuario actualizado exitosamente</response>
+    /// <response code="400">Datos de entrada inválidos</response>
+    /// <response code="404">Usuario no encontrado</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpPut("{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
@@ -129,6 +143,13 @@ public class UsersController(
         }
     }
     
+    /// <summary>
+    /// Endpoint GET para verificar si un usuario existe
+    /// </summary>
+    /// <param name="userId">ID del usuario a verificar</param>
+    /// <returns>Verdadero si el usuario existe, falso en caso contrario</returns>
+    /// <response code="200">Verificación exitosa</response>
+    /// <response code="404">Usuario no existe</response>
     [HttpGet("user-exists/{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]

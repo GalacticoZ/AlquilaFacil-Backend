@@ -8,19 +8,24 @@ using Shared.Interfaces.REST.Resources;
 
 namespace IAMService.Interfaces.REST;
 
+/// <summary>
+/// Controlador para autenticación de usuarios
+/// </summary>
 [Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 public class AuthenticationController(IUserCommandService userCommandService) : ControllerBase
 {
-    /**
-     * <summary>
-     *     Sign in endpoint. It allows to authenticate a user
-     * </summary>
-     * <param name="signInResource">The sign in resource containing username and password.</param>
-     * <returns>The authenticated user resource, including a JWT token</returns>
-     */
+    /// <summary>
+    /// Sign in endpoint. It allows to authenticate a user
+    /// </summary>
+    /// <param name="signInResource">The sign in resource containing username and password.</param>
+    /// <returns>The authenticated user resource, including a JWT token</returns>
+    /// <response code="200">Usuario autenticado exitosamente</response>
+    /// <response code="400">Datos de autenticación inválidos</response>
+    /// <response code="404">Usuario no encontrado</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpPost("sign-in")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(AuthenticatedUserResource), StatusCodes.Status200OK)]
@@ -53,13 +58,15 @@ public class AuthenticationController(IUserCommandService userCommandService) : 
         }
     }
 
-    /**
-     * <summary>
-     *     Sign up endpoint. It allows to create a new user
-     * </summary>
-     * <param name="signUpResource">The sign up resource containing username and password.</param>
-     * <returns>A confirmation message on successful creation.</returns>
-     */
+    /// <summary>
+    /// Sign up endpoint. It allows to create a new user
+    /// </summary>
+    /// <param name="signUpResource">The sign up resource containing username and password.</param>
+    /// <returns>A confirmation message on successful creation.</returns>
+    /// <response code="200">Usuario creado exitosamente</response>
+    /// <response code="400">Datos de registro inválidos</response>
+    /// <response code="404">Recurso no encontrado</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpPost("sign-up")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]

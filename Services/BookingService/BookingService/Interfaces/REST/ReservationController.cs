@@ -10,11 +10,23 @@ using Shared.Interfaces.REST.Resources;
 
 namespace BookingService.Interfaces.REST;
 
+/// <summary>
+/// Controlador para gestión de reservaciones
+/// </summary>
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
 public class ReservationController(IReservationCommandService reservationCommandService, IReservationQueryService reservationQueryService) : ControllerBase
 {
+    /// <summary>
+    /// Endpoint POST para crear una nueva reservación
+    /// </summary>
+    /// <param name="resource">Datos de la reservación a crear</param>
+    /// <returns>Reservación creada</returns>
+    /// <response code="201">Reservación creada exitosamente</response>
+    /// <response code="400">Datos de entrada inválidos</response>
+    /// <response code="404">Recurso relacionado no encontrado</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpPost]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
@@ -44,6 +56,16 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint PUT para actualizar una reservación existente
+    /// </summary>
+    /// <param name="id">ID de la reservación a actualizar</param>
+    /// <param name="resource">Datos actualizados de la reservación</param>
+    /// <returns>Reservación actualizada</returns>
+    /// <response code="200">Reservación actualizada exitosamente</response>
+    /// <response code="400">Datos de entrada inválidos</response>
+    /// <response code="404">Reservación no encontrada</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpPut("{id:int}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
@@ -73,6 +95,15 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint DELETE para eliminar una reservación
+    /// </summary>
+    /// <param name="id">ID de la reservación a eliminar</param>
+    /// <returns>Mensaje de confirmación</returns>
+    /// <response code="200">Reservación eliminada exitosamente</response>
+    /// <response code="400">Datos de entrada inválidos</response>
+    /// <response code="404">Reservación no encontrada</response>
+    /// <response code="500">Error interno del servidor</response>
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
@@ -101,6 +132,13 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint GET para obtener reservaciones por ID de usuario
+    /// </summary>
+    /// <param name="userId">ID del usuario</param>
+    /// <returns>Lista de reservaciones del usuario</returns>
+    /// <response code="200">Reservaciones obtenidas exitosamente</response>
+    /// <response code="404">Usuario no encontrado o sin reservaciones</response>
     [HttpGet("by-user-id/{userId:int}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -119,6 +157,13 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint GET para obtener detalles de reservaciones por ID de propietario
+    /// </summary>
+    /// <param name="userId">ID del propietario</param>
+    /// <returns>Detalles de reservaciones del propietario</returns>
+    /// <response code="200">Detalles obtenidos exitosamente</response>
+    /// <response code="404">Propietario no encontrado o sin reservaciones</response>
     [HttpGet("reservation-user-details/{userId:int}")]
     [ProducesResponseType(typeof(ReservationDetailsResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -137,6 +182,13 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint GET para obtener reservaciones por fecha de inicio
+    /// </summary>
+    /// <param name="startDate">Fecha de inicio de la reservación</param>
+    /// <returns>Lista de reservaciones con la fecha de inicio especificada</returns>
+    /// <response code="200">Reservaciones obtenidas exitosamente</response>
+    /// <response code="404">No se encontraron reservaciones para la fecha</response>
     [HttpGet("by-start-date/{startDate}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -155,6 +207,13 @@ public class ReservationController(IReservationCommandService reservationCommand
         }
     }
 
+    /// <summary>
+    /// Endpoint GET para obtener reservaciones por fecha de fin
+    /// </summary>
+    /// <param name="endDate">Fecha de fin de la reservación</param>
+    /// <returns>Lista de reservaciones con la fecha de fin especificada</returns>
+    /// <response code="200">Reservaciones obtenidas exitosamente</response>
+    /// <response code="404">No se encontraron reservaciones para la fecha</response>
     [HttpGet("by-end-date/{endDate}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
