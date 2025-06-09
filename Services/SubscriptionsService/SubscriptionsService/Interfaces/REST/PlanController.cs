@@ -9,7 +9,7 @@ using Shared.Interfaces.REST.Resources;
 namespace SubscriptionsService.Interfaces.REST;
 
 /// <summary>
-/// Controlador para gestión de planes de suscripción
+/// Controller for subscription plan management
 /// </summary>
 [ApiController]
 [Route("api/v1/[controller]")]
@@ -17,11 +17,8 @@ namespace SubscriptionsService.Interfaces.REST;
 public class PlanController(IPlanQueryService planQueryService) : ControllerBase
 {
     /// <summary>
-    /// Endpoint GET para obtener todos los planes de suscripción disponibles
+    /// GET endpoint to get all available subscription plans
     /// </summary>
-    /// <returns>Lista de todos los planes</returns>
-    /// <response code="200">Planes obtenidos exitosamente</response>
-    /// <response code="404">No se encontraron planes o error en la consulta</response>
     [HttpGet]
     [ProducesResponseType(typeof(PlanResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -29,17 +26,17 @@ public class PlanController(IPlanQueryService planQueryService) : ControllerBase
     {
         try
         {
-            // Crea la query para obtener todos los planes
+            // Create the query to get all plans
             var getAllPlansQuery = new GetAllPlansQuery();
-            // Ejecuta la consulta para obtener los planes
+            // Execute the query to get the plans
             var plans = await planQueryService.Handle(getAllPlansQuery);
-            // Convierte cada entidad plan a recurso de respuesta
+            // Convert each plan entity to a response resource
             var resources = plans.Select(PlanResourceFromEntityAssembler.ToResourceFromEntity);
             return Ok(resources);
         }
         catch (Exception ex)
         {
-            // Maneja error cuando no se encuentran planes o falla la consulta
+            // Handle errors when no plans are found or the query fails
             return NotFound(new { Error = ex.Message }); // 404
         }
     }

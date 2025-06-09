@@ -10,6 +10,8 @@ using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -39,37 +41,78 @@ builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
         }
     });
 
+// Configure Lowercase URLs
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-    c =>
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
     {
-        c.SwaggerDoc("v1",
-            new OpenApiInfo
-            {
-                Title = "Notification.API",
-                Version = "v1",
-                Description = "Notification API",
-                TermsOfService = new Uri("https://alquila-facil.com/tos"),
-                Contact = new OpenApiContact
-                {
-                    Name = "Alquila Facil",
-                    Email = "contact@alquilaf.com"
-                },
-                License = new OpenApiLicense
-                {
-                    Name = "Apache 2.0",
-                    Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
-                }
-            }
-        );
-        c.AddServer(new OpenApiServer
+        Title = "NotificationService.API",
+        Version = "v1",
+        Description = "Notification Service API - Gestión de notificaciones",
+        TermsOfService = new Uri("https://alquila-facil.com/tos"),
+        Contact = new OpenApiContact
         {
-            Url = builder.Environment.IsDevelopment() ? "/" : "/notification"
-        });
+            Name = "Alquila Facil",
+            Email = "contact@alquilaf.com"
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Apache 2.0",
+            Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+        }
     });
 
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
+    // CORREGIR: Configuración del servidor base
+    if (builder.Environment.IsDevelopment())
+    {
+        c.AddServer(new OpenApiServer
+        {
+            Url = "https://localhost:8015",
+            Description = "Development Server"
+        });
+    }
+    else
+    {
+        c.AddServer(new OpenApiServer
+        {
+            Url = "/notification",
+            Description = "Production Server"
+        });
+    }
+
+    // MEJORAR: Configuración de comentarios XML más robusta
+    try
+    {
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        
+        if (File.Exists(xmlPath))
+        {
+            c.IncludeXmlComments(xmlPath);
+            Console.WriteLine($"XML documentation loaded from: {xmlPath}");
+        }
+        else
+        {
+            Console.WriteLine($"XML documentation not found at: {xmlPath}");
+            Console.WriteLine("Make sure GenerateDocumentationFile is set to true in your .csproj file");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error loading XML documentation: {ex.Message}");
+    }
+
+    // Configurar esquemas de respuesta
+    c.EnableAnnotations();
+    
+    // AGREGAR: Configuraciones adicionales para evitar errores
+    c.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
+    c.DescribeAllParametersInCamelCase();
+});
 
 // Add CORS Policy
 builder.Services.AddCors(options =>
@@ -83,10 +126,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-// Shared Bounded Context Injection Configuration
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-// Profiles Bounded Context Injection Configuration
+// Notification Bounded Context Injection Configuration
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<INotificationCommandService, NotificationCommandService>();
 builder.Services.AddScoped<INotificationQueryService, NotificationQueryService>();
@@ -97,8 +137,6 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8015);
 });
-
-//builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
@@ -112,8 +150,32 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(c =>
+    {
+        c.RouteTemplate = "swagger/{documentName}/swagger.json";
+    });
+    
+    app.UseSwaggerUI(c =>
+    {
+        // CORREGIR: Configuración más específica de la URL del endpoint
+        if (app.Environment.IsDevelopment())
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notification Service API V1");
+        }
+        else
+        {
+            c.SwaggerEndpoint("/notification/swagger/v1/swagger.json", "Notification Service API V1");
+        }
+        
+        c.DisplayRequestDuration();
+        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+        c.EnableDeepLinking();
+        c.EnableValidator();
+        
+        // AGREGAR: Configuraciones adicionales para debugging
+        c.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
+        c.ConfigObject.AdditionalItems.Add("syntaxHighlight.activated", true);
+    });
 }
 
 app.UseCors("AllowAllPolicy");

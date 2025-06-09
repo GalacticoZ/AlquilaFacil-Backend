@@ -13,7 +13,7 @@ namespace IAMService.Interfaces.REST;
 /// The users controller
 /// </summary>
 /// <remarks>
-/// This class is used to handle user requests
+/// This class handles user-related HTTP requests.
 /// </remarks>
 [Authorize]
 [ApiController]
@@ -24,13 +24,12 @@ public class UsersController(
     ) : ControllerBase
 {
     /// <summary>
-    /// Get user by id endpoint. It allows to get a user by id
+    /// Get user by ID.
     /// </summary>
-    /// <param name="userId">The user id</param>
+    /// <param name="userId">The user's ID</param>
     /// <returns>The user resource</returns>
-    /// <response code="200">Usuario obtenido exitosamente</response>
-    /// <response code="404">Usuario no encontrado</response>
-    //[AuthorizeRole(EUserRoles.Admin)]
+    /// <response code="200">User successfully retrieved</response>
+    /// <response code="404">User not found</response>
     [HttpGet("{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
@@ -47,20 +46,19 @@ public class UsersController(
         }
         catch (Exception ex)
         {
-            return NotFound(new { Error = ex.Message }); // 404
+            return NotFound(new { Error = ex.Message });
         }
     }
-    
+
     /// <summary>
-    /// Get all users endpoint. It allows to get all users
+    /// Get all users.
     /// </summary>
-    /// <returns>The user resources</returns>
-    /// <response code="200">Usuarios obtenidos exitosamente</response>
-    /// <response code="404">No se encontraron usuarios</response>
+    /// <returns>List of user resources</returns>
+    /// <response code="200">Users successfully retrieved</response>
+    /// <response code="404">No users found</response>
     [HttpGet]
-    //[AuthorizeRole(EUserRoles.Admin)]
     [AllowAnonymous]
-    [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IEnumerable<UserResource>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllUsers()
     {
@@ -73,17 +71,17 @@ public class UsersController(
         }
         catch (Exception ex)
         {
-            return NotFound(new { Error = ex.Message }); // 404
+            return NotFound(new { Error = ex.Message });
         }
     }
-    
+
     /// <summary>
-    /// Endpoint GET para obtener nombre de usuario por ID
+    /// Get a username by user ID.
     /// </summary>
-    /// <param name="userId">ID del usuario</param>
-    /// <returns>Nombre del usuario</returns>
-    /// <response code="200">Nombre de usuario obtenido exitosamente</response>
-    /// <response code="404">Usuario no encontrado</response>
+    /// <param name="userId">User ID</param>
+    /// <returns>Username</returns>
+    /// <response code="200">Username successfully retrieved</response>
+    /// <response code="404">User not found</response>
     [HttpGet("get-username/{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
@@ -98,20 +96,20 @@ public class UsersController(
         }
         catch (Exception ex)
         {
-            return NotFound(new { Error = ex.Message }); // 404
+            return NotFound(new { Error = ex.Message });
         }
     }
-    
+
     /// <summary>
-    /// Endpoint PUT para actualizar un usuario
+    /// Update a user by ID.
     /// </summary>
-    /// <param name="userId">ID del usuario a actualizar</param>
-    /// <param name="updateUsernameResource">Datos actualizados del usuario</param>
-    /// <returns>Usuario actualizado</returns>
-    /// <response code="200">Usuario actualizado exitosamente</response>
-    /// <response code="400">Datos de entrada inválidos</response>
-    /// <response code="404">Usuario no encontrado</response>
-    /// <response code="500">Error interno del servidor</response>
+    /// <param name="userId">User ID</param>
+    /// <param name="updateUsernameResource">Updated user data</param>
+    /// <returns>Updated user resource</returns>
+    /// <response code="200">User successfully updated</response>
+    /// <response code="400">Invalid input data</response>
+    /// <response code="404">User not found</response>
+    /// <response code="500">Internal server error</response>
     [HttpPut("{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(UserResource), StatusCodes.Status200OK)]
@@ -131,25 +129,25 @@ public class UsersController(
         }
         catch (BadHttpRequestException ex)
         {
-            return BadRequest(new { Error = ex.Message }); // 400
+            return BadRequest(new { Error = ex.Message });
         }
         catch (KeyNotFoundException ex)
         {
-            return NotFound(new { Error = ex.Message }); // 404
+            return NotFound(new { Error = ex.Message });
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message }); // 500
+            return StatusCode(500, new { Error = "Internal server error", Details = ex.Message });
         }
     }
-    
+
     /// <summary>
-    /// Endpoint GET para verificar si un usuario existe
+    /// Check if a user exists by ID.
     /// </summary>
-    /// <param name="userId">ID del usuario a verificar</param>
-    /// <returns>Verdadero si el usuario existe, falso en caso contrario</returns>
-    /// <response code="200">Verificación exitosa</response>
-    /// <response code="404">Usuario no existe</response>
+    /// <param name="userId">User ID</param>
+    /// <returns>True if user exists, false otherwise</returns>
+    /// <response code="200">Check completed successfully</response>
+    /// <response code="404">User does not exist</response>
     [HttpGet("user-exists/{userId:int}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
@@ -160,14 +158,15 @@ public class UsersController(
         {
             var userExistsQuery = new UserExistsQuery(userId);
             var exists =  userQueryService.Handle(userExistsQuery);
-            if (exists) {
+            if (exists)
+            {
                 return Ok(exists);
             }
             return NotFound(new { message = "User does not exist." });
         }
         catch (Exception ex)
         {
-            return NotFound(new { Error = ex.Message }); // 404
+            return NotFound(new { Error = ex.Message });
         }
     }
 }

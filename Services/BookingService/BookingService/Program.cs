@@ -14,19 +14,19 @@ using Shared.Application.External.OutboundServices;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Interfaces.ACL.Facades;
 using Shared.Interfaces.ACL.Facades.Services;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers( options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
+builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
 
 // Add Database Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 var developmentString = builder.Configuration.GetConnectionString("DevelopmentConnection");
 
 // Configure Database Context and Logging Levels
-
 builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
     options =>
     {
@@ -44,40 +44,79 @@ builder.Services.AddDbContext<BaseDbContext, AppDbContext>(
                 .EnableDetailedErrors();
         }
     });
+
 // Configure Lowercase URLs
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-    c =>
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
     {
-        c.SwaggerDoc("v1",
-            new OpenApiInfo
-            {
-                Title = "BookingService.API",
-                Version = "v1",
-                Description = "Booking Service API",
-                TermsOfService = new Uri("https://alquila-facil.com/tos"),
-                Contact = new OpenApiContact
-                {
-                    Name = "Alquila Facil",
-                    Email = "contact@alquilaf.com"
-                },
-                License = new OpenApiLicense
-                {
-                    Name = "Apache 2.0",
-                    Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
-                }
-            }
-        );
-        c.AddServer(new OpenApiServer
+        Title = "BookingService.API",
+        Version = "v1",
+        Description = "Booking Service API - Gestión de reservaciones",
+        TermsOfService = new Uri("https://alquila-facil.com/tos"),
+        Contact = new OpenApiContact
         {
-            Url = builder.Environment.IsDevelopment() ? "/" : "/booking"
-        });
+            Name = "Alquila Facil",
+            Email = "contact@alquilaf.com"
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Apache 2.0",
+            Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
+        }
     });
 
-builder.Services.AddRouting(options => options.LowercaseUrls = true);
+    // CORREGIR: Configuración del servidor base
+    if (builder.Environment.IsDevelopment())
+    {
+        c.AddServer(new OpenApiServer
+        {
+            Url = "https://localhost:8013",
+            Description = "Development Server"
+        });
+    }
+    else
+    {
+        c.AddServer(new OpenApiServer
+        {
+            Url = "/booking",
+            Description = "Production Server"
+        });
+    }
+
+    // MEJORAR: Configuración de comentarios XML más robusta
+    try
+    {
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        
+        if (File.Exists(xmlPath))
+        {
+            c.IncludeXmlComments(xmlPath);
+            Console.WriteLine($"XML documentation loaded from: {xmlPath}");
+        }
+        else
+        {
+            Console.WriteLine($"XML documentation not found at: {xmlPath}");
+            Console.WriteLine("Make sure GenerateDocumentationFile is set to true in your .csproj file");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error loading XML documentation: {ex.Message}");
+    }
+
+    // Configurar esquemas de respuesta
+    c.EnableAnnotations();
+    
+    // AGREGAR: Configuraciones adicionales para evitar errores
+    c.CustomSchemaIds(type => type.FullName?.Replace("+", "."));
+    c.DescribeAllParametersInCamelCase();
+});
 
 // Add CORS Policy
 builder.Services.AddCors(options =>
@@ -88,15 +127,12 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader());
 });
 
-
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //builder.Services.AddScoped<ISubscriptionInfoExternalService,SubscriptionInfoExternalService>();
 
-
 // Shared Bounded Context Injection Configuration
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 
 // Booking Bounded Context Injection Configuration
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
@@ -127,13 +163,35 @@ using (var scope = app.Services.CreateScope())
     context.Database.Migrate();
 }
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(c =>
+    {
+        c.RouteTemplate = "swagger/{documentName}/swagger.json";
+    });
+    
+    app.UseSwaggerUI(c =>
+    {
+        // CORREGIR: Configuración más específica de la URL del endpoint
+        if (app.Environment.IsDevelopment())
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Service API V1");
+        }
+        else
+        {
+            c.SwaggerEndpoint("/booking/swagger/v1/swagger.json", "Booking Service API V1");
+        }
+        
+        c.DisplayRequestDuration();
+        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+        c.EnableDeepLinking();
+        c.EnableValidator();
+        
+        // AGREGAR: Configuraciones adicionales para debugging
+        c.ConfigObject.AdditionalItems.Add("requestSnippetsEnabled", true);
+        c.ConfigObject.AdditionalItems.Add("syntaxHighlight.activated", true);
+    });
 }
 
 app.UseCors("AllowAllPolicy");
