@@ -4,12 +4,12 @@ RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
-COPY package.json ./
+COPY Services/CommunicationService/package.json ./
 
 RUN npm install
 
-COPY . .
+COPY Services/CommunicationService/ ./
 
 EXPOSE 8017
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

@@ -231,13 +231,13 @@ services:
 
   communication-database:
     image: mongo:latest
-    container_name: node-mongo-database
+    container_name: communication-database
     ports:
       - "27017:27017"
     volumes:
       - communication-database-data:/data/db
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 10s
       timeout: 10s
       retries: 10
@@ -281,3 +281,4 @@ volumes:
   profiles-database-data:
   notification-database-data:
   subscriptions-database-data:
+  communication-database-data:
