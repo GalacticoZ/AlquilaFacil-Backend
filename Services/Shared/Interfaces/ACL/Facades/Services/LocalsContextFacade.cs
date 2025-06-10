@@ -9,7 +9,7 @@ public class LocalsContextFacade(HttpClient httpClient) : ILocalsContextFacade
 
     public async Task<bool> LocalExists(int localId)
     {
-        var endpoint = $"http://localhost:5272/api/v1/locals/{localId}";
+        var endpoint = $"http://locals-service:8012/api/v1/locals/{localId}";
         var response = await httpClient.GetAsync(endpoint);
         if (!response.IsSuccessStatusCode)
         {
@@ -26,7 +26,7 @@ public class LocalsContextFacade(HttpClient httpClient) : ILocalsContextFacade
 
     public async Task<IEnumerable<LocalDTO>> GetLocalsByUserId(int userId)
     {
-        var endpoint = $"http://localhost:5272/api/v1/locals/get-user-locals/{userId}";
+        var endpoint = $"http://locals-service:8012/api/v1/locals/get-user-locals/{userId}";
         var response = await httpClient.GetAsync(endpoint);
         if (!response.IsSuccessStatusCode)
         {
@@ -41,7 +41,7 @@ public class LocalsContextFacade(HttpClient httpClient) : ILocalsContextFacade
 
     public async Task<bool> IsLocalOwner(int userId, int localId)
     {
-        var endpoint = $"http://localhost:5272/api/v1/locals/get-user-locals/{userId}";
+        var endpoint = $"http://locals-service:8012/api/v1/locals/get-user-locals/{userId}";
         var response = await httpClient.GetAsync(endpoint);
         if (!response.IsSuccessStatusCode)
         {
@@ -62,17 +62,13 @@ public class LocalsContextFacade(HttpClient httpClient) : ILocalsContextFacade
     
     public async Task<int> GetLocalOwnerIdByLocalId(int localId)
     {
-        var endpoint = $"http://localhost:5272/api/v1/locals/owner/{localId}";
+        var endpoint = $"http://locals-service:8012/api/v1/locals/owner/{localId}";
         var response = await httpClient.GetAsync(endpoint);
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception($"Error fetching local owner ID: {response.StatusCode}");
         }
         var content = await response.Content.ReadAsStringAsync();
-        var local = JsonSerializer.Deserialize<LocalDTO>(content, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return local.UserId;
+        return Convert.ToInt32(content);
     }
 }

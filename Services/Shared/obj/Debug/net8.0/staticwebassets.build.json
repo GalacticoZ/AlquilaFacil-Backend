@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "ul4Kzm8wSSnABTeo78amggQ+t7neJVqgkvdydrno9Fw=",
+  "Hash": "WGIke4oLHu/8aHEqMhpay+8dOyr3GWsFEMngM9JoNsk=",
   "Source": "Shared",
   "BasePath": "_content/Shared",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

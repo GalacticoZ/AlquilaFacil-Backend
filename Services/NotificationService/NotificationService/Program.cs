@@ -11,6 +11,10 @@ using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using System.Reflection;
+using NotificationService.Application.Internal.EventServices;
+using NotificationService.Infrastructure.Messaging.Kafka;
+using NotificationService.Interfaces.Messaging;
+using NotificationService.Interfaces.Messaging.Consumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -130,6 +134,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<INotificationCommandService, NotificationCommandService>();
 builder.Services.AddScoped<INotificationQueryService, NotificationQueryService>();
+
+builder.Services.AddScoped<INotificationEventService, NotificationEventService>();
+builder.Services.AddScoped<IBookingCreatedConsumer, BookingCreatedConsumer>();
+builder.Services.AddHostedService<ConsumerHostedService>();
 
 builder.Services.AddHttpClient();
 

@@ -183,4 +183,24 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
             return NotFound(new { Error = ex.Message }); // 404
         }
     }
+    
+    /// <summary>
+    /// GET endpoint to retrieve owner for a specific local
+    /// </summary>
+    [HttpGet("owner/{localId:int}")]
+    [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetOwnerIdByLocalId(int localId)
+    {
+        try
+        {
+            var getLocalOwnerIdByLocalIdQuery = new GetLocalOwnerIdByLocalId(localId);
+            var ownerId = await localQueryService.Handle(getLocalOwnerIdByLocalIdQuery);
+            return Ok(ownerId);
+        }
+        catch (Exception ex)
+        {
+            return NotFound(new { Error = ex.Message }); // 404
+        }
+    }
 }

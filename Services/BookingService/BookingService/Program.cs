@@ -15,6 +15,8 @@ using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Interfaces.ACL.Facades;
 using Shared.Interfaces.ACL.Facades.Services;
 using System.Reflection;
+using BookingService.Domain.Messaging;
+using BookingService.Infrastructure.Messaging.Kafka.BookingEventPublisher;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -147,6 +149,8 @@ builder.Services.AddScoped<IIamContextFacade, IamContextFacade>();
 builder.Services.AddScoped<ILocalsContextFacade, LocalsContextFacade>();
 builder.Services.AddScoped<ISubscriptionContextFacade, SubscriptionContextFacade>();
 
+builder.Services.AddScoped<IBookingEventPublisher, KafkaBookingEventPublisher>();
+
 builder.Services.AddHttpClient();
 
 builder.WebHost.ConfigureKestrel(options =>
@@ -160,7 +164,7 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<AppDbContext>();
-    context.Database.Migrate();
+    context.Database.EnsureCreated();
 }
 
 // Configure the HTTP request pipeline.

@@ -18,6 +18,14 @@ public partial class Notification
         Description = string.Empty;
         UserId = 0;
     }
+    
+    public Notification(string title, string description, int userId)
+    {
+        Title = title;
+        Description = description;
+        UserId = userId;
+    }
+
 
     public Notification(CreateNotificationCommand command)
     {

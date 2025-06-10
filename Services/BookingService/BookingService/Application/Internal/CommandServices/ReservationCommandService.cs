@@ -1,9 +1,11 @@
 using BookingService.Domain.Services;
 using BookingService.Application.External.OutboundServices;
+using BookingService.Domain.Messaging;
 using BookingService.Domain.Model.Aggregates;
 using BookingService.Domain.Model.Commands;
 using BookingService.Domain.Repositories;
 using Shared.Application.External.OutboundServices;
+using Shared.Domain.Model.Events;
 using Shared.Domain.Repositories;
 
 namespace BookingService.Application.Internal.CommandServices;
@@ -11,6 +13,7 @@ namespace BookingService.Application.Internal.CommandServices;
 public class ReservationCommandService(
  IUserExternalService userExternalService,
  IReservationLocalExternalService reservationLocalExternalService, 
+ IBookingEventPublisher bookingEventPublisher,
  //INotificationReservationExternalService notificationReservationExternalService,
  IReservationRepository reservationRepository,
  IUnitOfWork unitOfWork) : IReservationCommandService
@@ -46,20 +49,24 @@ public class ReservationCommandService(
             throw new BadHttpRequestException("User is the owner of the local, he cannot make a reservation");
      }
      
-     
+
+
 
      var reservationCreated = new Reservation(reservation);
      await reservationRepository.AddAsync(reservationCreated);
+     var ownerId = await reservationLocalExternalService.GetOwnerIdByLocalId(reservation.LocalId);
+     var reservationUser = await userExternalService.FetchUser(reservation.UserId);
+     await bookingEventPublisher.PublishAsync(new BookingCreatedEvent
+     {
+         BookingId = reservationCreated.Id,
+         UserEmail = reservationUser.Email,
+         CreatedAt = DateTime.UtcNow,
+         Content = "Reservation Created, from user" + reservationUser.Username + " at " + DateTime.UtcNow,
+         OwnerId = ownerId
+     });
+     
      await unitOfWork.CompleteAsync();
      
-     //var ownerId = await reservationLocalExternalService.GetOwnerIdByLocalId(reservation.LocalId);
-     /*
-     await notificationReservationExternalService.CreateNotification(
-         "Nueva reservación",
-         $"Tienes una nueva reservación desde el {reservation.StartDate:dd/MM/yyyy} a las {reservation.StartDate:HH:mm} hasta el {reservation.EndDate:dd/MM/yyyy} a las {reservation.EndDate:HH:mm}. Verifica los datos del voucher de pago para corroborar que el depósito se realizó correctamente",
-         ownerId
-     );
-     */
      return reservationCreated;
  }
 
