@@ -229,6 +229,33 @@ services:
     ports:
       - "8016:8016"
 
+  communication-database:
+    image: mongo:latest
+    container_name: node-mongo-database
+    ports:
+      - "27017:27017"
+    volumes:
+      - communication-database-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+  
+  communication-service:
+    build:
+      context: .
+      dockerfile: Services/CommunicationService/Dockerfile
+    container_name: communication-service
+    depends_on:
+      communication-database:
+        condition: service_healthy
+    environment:
+      - MONGO_URL=mongodb://communication-database:27017/chat
+      - NODE_ENV=production
+    ports:
+      - "8017:8017"
+
   api-gateway:
     build:
       context: .
@@ -241,6 +268,7 @@ services:
       - profiles-service
       - notification-service
       - subscriptions-service
+      - communication-service
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
