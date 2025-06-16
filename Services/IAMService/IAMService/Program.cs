@@ -19,6 +19,7 @@ using Microsoft.OpenApi.Models;
 using ProfilesService.Interfaces.ACL;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using System.Reflection;
+using IAMService.Infrastructure.Pipeline.Middleware.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,6 +55,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -74,7 +76,31 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 
-    // CORREGIR: Configuración del servidor base
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingresa el token JWT en el formato: Bearer {token}"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+
     if (builder.Environment.IsDevelopment())
     {
         c.AddServer(new OpenApiServer
@@ -92,7 +118,6 @@ builder.Services.AddSwaggerGen(c =>
         });
     }
 
-    // MEJORAR: Configuración de comentarios XML más robusta
     try
     {
         var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -202,6 +227,8 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 }
 
 app.UseCors("AllowAllPolicy");
+
+app.UseRequestAuthorization();
 
 app.UseHttpsRedirection();
 
