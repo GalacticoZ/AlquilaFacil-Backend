@@ -74,16 +74,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8021:8011"
-  
-  iam-balancer:
-    image: nginx:latest
-    ports:
-      - "8111:80"
-    volumes:
-      - ./nginx/iam.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - iam-service-1
-      - iam-service-2
 
   locals-database:
     image: 'mysql:latest'
@@ -288,7 +278,8 @@ services:
       dockerfile: ApiGateway/Dockerfile
     container_name: api-gateway
     depends_on:
-      - iam-balancer
+      - iam-service-1
+      - iam-service-2
       - locals-service
       - booking-service
       - profiles-service
