@@ -8,7 +8,7 @@ public class IamContextFacade(HttpClient httpClient) : IIamContextFacade
 {
     public async Task<bool> UserExists(int userId)
     {
-        var endpoint = $"http://iam-balancer/api/v1/users/user-exists/{userId}";
+        var endpoint = $"http://api-gateway:80/iam/api/v1/users/user-exists/{userId}";
         var response = await httpClient.GetAsync(endpoint);
 
         if (response.IsSuccessStatusCode)
@@ -23,7 +23,7 @@ public class IamContextFacade(HttpClient httpClient) : IIamContextFacade
 
     public async Task<UserDTO> FetchUser(int userId)
     {
-        var endpoint = $"http://iam-balancer:8011/api/v1/users/{userId}";
+        var endpoint = $"http://api-gateway:80/iam/api/v1/users/{userId}";
         var response = await httpClient.GetAsync(endpoint);
 
         if (response.IsSuccessStatusCode)
