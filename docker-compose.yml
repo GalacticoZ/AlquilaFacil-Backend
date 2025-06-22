@@ -49,11 +49,8 @@ services:
       dockerfile: Services/IAMService/IAMService/Dockerfile
     container_name: iam-service-1
     depends_on:
-      #      - kafka
       iam-database:
         condition: service_healthy
-    #    environment:
-    #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
@@ -65,11 +62,8 @@ services:
       dockerfile: Services/IAMService/IAMService/Dockerfile
     container_name: iam-service-2
     depends_on:
-      #      - kafka
       iam-database:
         condition: service_healthy
-    #    environment:
-    #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
@@ -93,17 +87,27 @@ services:
     volumes:
       - locals-database-data:/var/lib/mysql
 
-  locals-service:
+  locals-service-1:
     build:
       context: .
       dockerfile: Services/LocalsService/LocalsService/Dockerfile
-    container_name: locals-service
+    container_name: locals-service-1
     depends_on:
-      #      - kafka
       locals-database:
         condition: service_healthy
-    #    environment:
-    #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8012:8012"
+
+  locals-service-2:
+    build:
+      context: .
+      dockerfile: Services/LocalsService/LocalsService/Dockerfile
+    container_name: locals-service-2
+    depends_on:
+      locals-database:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
@@ -127,11 +131,11 @@ services:
     volumes:
       - booking-database-data:/var/lib/mysql
 
-  booking-service:
+  booking-service-1:
     build:
       context: .
       dockerfile: Services/BookingService/BookingService/Dockerfile
-    container_name: booking-service
+    container_name: booking-service-1
     depends_on:
       kafka:
         condition: service_started
@@ -142,7 +146,23 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8013:8013"
-  
+
+  booking-service-2:
+    build:
+      context: .
+      dockerfile: Services/BookingService/BookingService/Dockerfile
+    container_name: booking-service-2
+    depends_on:
+      kafka:
+        condition: service_started
+      booking-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8013:8013"
+
   profiles-database:
     image: 'mysql:latest'
     container_name: profiles-database
@@ -161,22 +181,32 @@ services:
     volumes:
       - profiles-database-data:/var/lib/mysql
   
-  profiles-service:
+  profiles-service-1:
     build:
       context: .
       dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
     container_name: profiles-service
     depends_on:
-      #      - kafka
       profiles-database:
         condition: service_healthy
-    #    environment:
-    #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8014:8014"
-  
+
+  profiles-service-2:
+    build:
+      context: .
+      dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
+    container_name: profiles-service-2
+    depends_on:
+      profiles-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8014:8014"
+
   notification-database:
     image: 'mysql:latest'
     container_name: notification-database
@@ -195,11 +225,27 @@ services:
     volumes:
       - notification-database-data:/var/lib/mysql
   
-  notification-service:
+  notification-service-1:
     build:
       context: .
       dockerfile: Services/NotificationService/NotificationService/Dockerfile
-    container_name: notification-service
+    container_name: notification-service-1
+    depends_on:
+      kafka:
+        condition: service_started
+      notification-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8015:8015"
+
+  notification-service-2:
+    build:
+      context: .
+      dockerfile: Services/NotificationService/NotificationService/Dockerfile
+    container_name: notification-service-2
     depends_on:
       kafka:
         condition: service_started
@@ -229,17 +275,27 @@ services:
     volumes:
       - subscriptions-database-data:/var/lib/mysql
   
-  subscriptions-service:
+  subscriptions-service-1:
     build:
       context: .
       dockerfile: Services/SubscriptionsService/SubscriptionsService/Dockerfile
-    container_name: subscriptions-service
+    container_name: subscriptions-service-1
     depends_on:
-      #      - kafka
       subscriptions-database:
         condition: service_healthy
-    #    environment:
-    #      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8016:8016"
+
+  subscriptions-service-2:
+    build:
+      context: .
+      dockerfile: Services/SubscriptionsService/SubscriptionsService/Dockerfile
+    container_name: subscriptions-service-2
+    depends_on:
+      subscriptions-database:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
@@ -280,11 +336,16 @@ services:
     depends_on:
       - iam-service-1
       - iam-service-2
-      - locals-service
-      - booking-service
-      - profiles-service
-      - notification-service
-      - subscriptions-service
+      - locals-service-1
+      - locals-service-2
+      - booking-service-1
+      - booking-service-2
+      - profiles-service-1
+      - profiles-service-2
+      - notification-service-1
+      - notification-service-2
+      - subscriptions-service-1
+      - subscriptions-service-2
       - communication-service
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
