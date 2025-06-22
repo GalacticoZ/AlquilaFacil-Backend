@@ -185,7 +185,7 @@ services:
     build:
       context: .
       dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
-    container_name: profiles-service
+    container_name: profiles-service-1
     depends_on:
       profiles-database:
         condition: service_healthy
