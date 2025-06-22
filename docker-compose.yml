@@ -358,6 +358,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:80"
+    environment:
+      - VITE_API_BASE_URL=http://api-gateway:80
 
 volumes:
   iam-database-data:

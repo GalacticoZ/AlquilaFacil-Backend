@@ -9,7 +9,7 @@ export class LocalsApiService {
 
   constructor() {
     this.userApiService = new UsersApiService();
-    this.serviceBaseUrl = "/locals";
+    this.serviceBaseUrl = "/locals/api/v1/locals";
   }
 
   async create(localResource) {

@@ -7,7 +7,7 @@ import http from "../../shared/services/http-common.js";
 export class LocalCategoriesApiService {
 
   constructor() {
-    this.serviceBaseUrl = "/local-categories";
+    this.serviceBaseUrl = "/locals/api/v1/local-categories";
   }
 
   async getAll() {

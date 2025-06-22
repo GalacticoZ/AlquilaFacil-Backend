@@ -8,7 +8,7 @@ import { formatReservationDay } from "../utils/formatReservationDay";
 export class ReservationsApiService {
 
   constructor() {
-    this.serviceBaseUrl = "/reservation";
+    this.serviceBaseUrl = "/booking/api/v1/reservation";
   }
 
   async create(reservationResource) {

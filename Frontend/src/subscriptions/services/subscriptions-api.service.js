@@ -6,7 +6,7 @@ import http from "../../shared/services/http-common.js";
 
 export class SubscriptionsApiService {
   constructor() {
-    this.serviceBaseUrl = "/subscriptions";
+    this.serviceBaseUrl = "/subscriptions/api/v1/subscriptions";
   }
   async create(subscriptionResource) {
     const response = await http.post(`${this.serviceBaseUrl}`, subscriptionResource);

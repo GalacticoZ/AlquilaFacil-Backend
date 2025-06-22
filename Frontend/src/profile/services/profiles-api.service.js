@@ -7,7 +7,7 @@ import http from "../../shared/services/http-common.js";
 export class ProfilesApiService {
 
   constructor() {
-    this.serviceBaseUrl = "/profiles";
+    this.serviceBaseUrl = "/profiles/api/v1/profiles";
   }
   async getByUserId(userId) {
     const response = await http.get(`${this.serviceBaseUrl}/user/${userId}`);

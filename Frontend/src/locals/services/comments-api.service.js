@@ -9,7 +9,7 @@ export class CommentsApiService {
 
   constructor() {
     this.userApiService = new UsersApiService();
-    this.serviceBaseUrl = "/comment";
+    this.serviceBaseUrl = "/locals/api/v1/comment";
   }
   async getAllByLocalId(localId) {
 

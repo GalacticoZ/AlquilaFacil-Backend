@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 export class AuthenticationService {
 
   constructor() {
-    this.serviceBaseUrl = "/authentication";
+    this.serviceBaseUrl = "/iam/api/v1/authentication";
   }
 
   async signIn(signInRequest) {

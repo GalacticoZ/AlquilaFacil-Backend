@@ -7,7 +7,7 @@ import http from "../../shared/services/http-common.js";
 export class ReportsApiService {
 
   constructor() {
-    this.serviceBaseUrl = "/report";
+    this.serviceBaseUrl = "/locals/api/v1/report";
   }
 
   async create(reportResource) {

@@ -7,7 +7,7 @@ import http from "@/shared/services/http-common.js";
 export class NotificationsApiService {
 
   constructor() {
-    this.serviceBaseUrl = "/notification";
+    this.serviceBaseUrl = "/notification/api/v1/notification";
   }
 
   async getByUserId(userId) {
