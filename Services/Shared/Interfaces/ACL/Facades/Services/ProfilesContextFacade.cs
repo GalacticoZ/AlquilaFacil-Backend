@@ -14,7 +14,7 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
         int userId
     )
     {
-        var endpoint = "http://profiles-service:8014/api/v1/profiles";
+        var endpoint = "http://api-gateway:80/profiles/api/v1/profiles";
 
         var profileData = new
         {
@@ -52,7 +52,7 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
         int userId
     )
     {
-        var endpoint = $"http://profiles-service:8014/api/v1/profiles/{userId}";
+        var endpoint = $"http://api-gateway:80/profiles/api/v1/profiles/{userId}";
 
         var profileData = new
         {

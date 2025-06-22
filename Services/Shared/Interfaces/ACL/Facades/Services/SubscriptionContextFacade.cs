@@ -8,7 +8,7 @@ public class SubscriptionContextFacade(HttpClient httpClient) : ISubscriptionCon
 {
     public async Task<IEnumerable<SubscriptionDTO>> GetSubscriptionByUserIdsList(List<int> usersId)
     {
-        var endpoint = $"http://subscriptions-service:8016/api/v1/subscriptions/subscriptions/by-users";
+        var endpoint = $"http://api-gateway:80/subscriptions/api/v1/subscriptions/subscriptions/by-users";
         // put the query param as array with usersId=
         var query = string.Join("&", usersId.Select(id => $"usersId={id}"));
         endpoint += $"?{query}";
