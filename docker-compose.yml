@@ -288,7 +288,7 @@ services:
       dockerfile: ApiGateway/Dockerfile
     container_name: api-gateway
     depends_on:
-      - iam-service
+      - iam-balancer
       - locals-service
       - booking-service
       - profiles-service
