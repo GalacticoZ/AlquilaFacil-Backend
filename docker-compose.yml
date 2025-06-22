@@ -273,6 +273,13 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
     ports:
       - "8000:80"
+    
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
 
 volumes:
   iam-database-data:
