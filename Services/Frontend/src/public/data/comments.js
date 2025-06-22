@@ -1,0 +1,42 @@
+export const commentsFakeData = [
+  {
+    id: 1,
+    userId: 1,
+    userUsername: 'Usuario 1',
+    localId: 1,
+    text: 'Comentario 1',
+    rating: 5,
+  },
+  {
+    id: 2,
+    userId: 2,
+    userUsername: 'Usuario 2',
+    localId: 2,
+    text: 'Comentario 2',
+    rating: 4,
+  },
+  {
+    id: 3,
+    userId: 3,
+    userUsername: 'Usuario 3',
+    localId: 3,
+    text: 'Comentario 3',
+    rating: 3,
+  },
+  {
+    id: 4,
+    userId: 4,
+    userUsername: 'Usuario 4',
+    localId: 1,
+    text: 'Comentario 4',
+    rating: 2,
+  },
+  {
+    id: 5,
+    userId: 5,
+    userUsername: 'Usuario 5',
+    localId: 2,
+    text: 'Comentario 5',
+    rating: 1,
+  },
+];

@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 10dvh;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Jost', sans-serif;
+}
+
+body {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+}
+
+:root {
+  --background-color: #ffffff;
+  --background-card-color: #ffffff;
+  --text-color: #000000;
+  --button-color: #D9D9D9;
+  --button-color-hover: #bfbfbf;
+  --text-button-color: #bfbfbf;
+  --primary-color: #D13333;
+  --primary-color-hover: #b12c2c;
+  --secondary-color: #fb9e49;
+  --secondary-color-hover: #d36b09;
+  --secondary-color-dark: #d36b09;
+  --navbar-text-color: #ffffff;
+  --navbar-text-color-hover: #ffd900;
+}
+
+[data-theme='dark'] {
+  --background-color: #1D1D1D;
+  --background-card-color: #2e2e2e;
+  --text-color: #ffffff;
+  --button-color: #D9D9D9;
+  --text-button-color: #474747;
+  --primary-color: #D13333;
+  --navbar-text-color: #ffffff;
+  --navbar-text-color-hover: #ffd900;
+}
+
+main {
+  background-color: var(--background-color);
+}
+
+.skeleton {
+  background-color: var(--color-gray-300);
+  border-radius: 0.50rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
