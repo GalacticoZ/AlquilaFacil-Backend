@@ -356,10 +356,10 @@ services:
     build:
       context: ./Frontend
       dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://api-gateway:80
     ports:
       - "3000:80"
-    args:
-      VITE_API_BASE_URL: http://api-gateway:80
     environment:
       - VITE_API_BASE_URL=http://api-gateway:80
 
