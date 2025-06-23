@@ -73,6 +73,31 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0.html")
         }
     });
+    
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Ingresa el token JWT en el formato: Bearer {token}"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 
     // CORREGIR: Configuración del servidor base
     if (builder.Environment.IsDevelopment())
