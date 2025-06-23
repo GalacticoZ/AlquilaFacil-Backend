@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using SubscriptionsService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Interfaces.REST.Resources;
@@ -14,6 +15,7 @@ namespace SubscriptionsService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize]
 public class InvoiceController(
     IInvoiceCommandService invoiceCommandService,
     IInvoiceQueryService invoiceQueryService) 
@@ -25,6 +27,7 @@ public class InvoiceController(
     [HttpPost]
     [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateInvoice([FromBody] CreateInvoiceResource createInvoiceResource)
@@ -57,6 +60,7 @@ public class InvoiceController(
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoices()
     {
@@ -77,6 +81,7 @@ public class InvoiceController(
     /// </summary>
     [HttpGet("{invoiceId}")]
     [ProducesResponseType(typeof(InvoiceResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoiceById(int invoiceId)
     {

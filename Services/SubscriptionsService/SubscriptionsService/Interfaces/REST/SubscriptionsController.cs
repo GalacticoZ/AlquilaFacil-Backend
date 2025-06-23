@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using ProfilesService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Model.Commands;
 using SubscriptionsService.Domain.Model.Queries;
@@ -16,6 +17,7 @@ namespace SubscriptionsService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize]
 public class SubscriptionsController(
     ISubscriptionCommandService subscriptionCommandService,
     ISubscriptionQueryServices subscriptionQueryServices)
@@ -24,10 +26,10 @@ public class SubscriptionsController(
     /// <summary>
     /// POST endpoint to create a new subscription
     /// </summary>
-    
     [HttpPost]
     [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateSubscription(
@@ -36,7 +38,8 @@ public class SubscriptionsController(
         try
         {
             var createSubscriptionCommand =
-                CreateSubscriptionCommandFromResourceAssembler.ToCommandFromResource(createSubscriptionResource); var subscription = await subscriptionCommandService.Handle(createSubscriptionCommand);
+                CreateSubscriptionCommandFromResourceAssembler.ToCommandFromResource(createSubscriptionResource);
+            var subscription = await subscriptionCommandService.Handle(createSubscriptionCommand);
             if (subscription is null) return BadRequest(new { Error = "Failed to create subscription" });
             var resource = SubscriptionResourceFromEntityAssembler.ToResourceFromEntity(subscription);
             return StatusCode(201, resource);
@@ -58,9 +61,9 @@ public class SubscriptionsController(
     /// <summary>
     /// GET endpoint to get all available subscriptions
     /// </summary>
-  
     [HttpGet]
     [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllSubscriptions()
     {
@@ -80,9 +83,9 @@ public class SubscriptionsController(
     /// <summary>
     /// GET endpoint to get the subscription status of a specific user
     /// </summary>
-    
     [HttpGet("status/{userId}")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetSubscriptionStatusByUserId([FromRoute] int userId)
     {
@@ -101,10 +104,10 @@ public class SubscriptionsController(
     /// <summary>
     /// PUT endpoint to activate the status of a subscription
     /// </summary>
-   
     [HttpPut("{subscriptionId}")]
     [ProducesResponseType(typeof(SubscriptionResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ActiveSubscriptionStatus(int subscriptionId)

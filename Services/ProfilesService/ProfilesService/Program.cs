@@ -11,6 +11,8 @@ using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using System.Reflection;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -135,6 +137,22 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8014);
 });
+
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["JWT_SECRET"])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
 
 var app = builder.Build();
 

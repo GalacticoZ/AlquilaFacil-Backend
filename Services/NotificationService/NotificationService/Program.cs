@@ -11,6 +11,8 @@ using Shared.Infrastructure.Persistence.EFC.Configuration;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using System.Reflection;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using NotificationService.Application.Internal.EventServices;
 using NotificationService.Infrastructure.Messaging.Kafka;
 using NotificationService.Interfaces.Messaging;
@@ -145,6 +147,25 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8015);
 });
+
+
+// Configuración JWT Authentication
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["JWT_SECRET"])),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+
 
 var app = builder.Build();
 

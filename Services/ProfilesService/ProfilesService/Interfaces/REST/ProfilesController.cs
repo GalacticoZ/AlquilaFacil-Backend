@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using ProfilesService.Domain.Model.Aggregates;
 using ProfilesService.Domain.Model.Queries;
 using ProfilesService.Domain.Services;
@@ -15,6 +16,7 @@ namespace ProfilesService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize]
 public class ProfilesController(
     IProfileCommandService profileCommandService, 
     IProfileQueryService profileQueryService)
@@ -26,6 +28,7 @@ public class ProfilesController(
     [HttpPost]
     [ProducesResponseType(typeof(ProfileResource), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateProfile(CreateProfileResource resource)
@@ -57,6 +60,7 @@ public class ProfilesController(
     /// </summary>
     [HttpGet("user/{userId}")]
     [ProducesResponseType(typeof(ProfileResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProfileByUserId(int userId)
     {
@@ -78,6 +82,7 @@ public class ProfilesController(
     /// </summary>
     [HttpGet("bank-accounts/{userId}")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProfileBankAccountsByUserId(int userId)
     {
@@ -99,6 +104,7 @@ public class ProfilesController(
     [HttpPut("{userId}")]
     [ProducesResponseType(typeof(ProfileResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> UpdateProfile(int userId, [FromBody] UpdateProfileResource updateProfileResource)

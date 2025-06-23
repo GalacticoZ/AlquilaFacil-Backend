@@ -6,6 +6,7 @@ using BookingService.Domain.Model.Queries;
 using BookingService.Interfaces.REST.Resources;
 using BookingService.Interfaces.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Shared.Interfaces.REST.Resources;
 
 namespace BookingService.Interfaces.REST;
@@ -16,6 +17,7 @@ namespace BookingService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize] 
 public class ReservationController(IReservationCommandService reservationCommandService, IReservationQueryService reservationQueryService) : ControllerBase
 {
     /// <summary>
@@ -25,17 +27,22 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <returns>Created reservation</returns>
     /// <response code="201">Reservation successfully created</response>
     /// <response code="400">Invalid input data</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Related resource not found</response>
     /// <response code="500">Internal server error</response>
     [HttpPost]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateReservationAsync([FromBody]CreateReservationResource resource)
     {
         try
         {
+            // 🔑 Puedes obtener el userId del token JWT si lo necesitas
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            
             var command = CreateReservationCommandFromResourceAssembler.ToCommandFromResource(resource);
             var result = await reservationCommandService.Handle(command);
             if (result is null) return BadRequest(new { Error = "Failed to create reservation" });
@@ -64,11 +71,13 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <returns>Updated reservation</returns>
     /// <response code="200">Reservation successfully updated</response>
     /// <response code="400">Invalid input data</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Reservation not found</response>
     /// <response code="500">Internal server error</response>
     [HttpPut("{id:int}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> UpdateReservationAsync(int id, [FromBody]UpdateReservationResource resource)
@@ -102,11 +111,13 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <returns>Confirmation message</returns>
     /// <response code="200">Reservation successfully deleted</response>
     /// <response code="400">Invalid input data</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Reservation not found</response>
     /// <response code="500">Internal server error</response>
     [HttpDelete("{id}")]
     [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteReservationAsync(int id)
@@ -138,9 +149,11 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <param name="userId">User ID</param>
     /// <returns>List of user reservations</returns>
     /// <response code="200">Reservations successfully retrieved</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">User not found or no reservations</response>
     [HttpGet("by-user-id/{userId:int}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetReservationsByUserIdAsync(int userId)
     {
@@ -163,9 +176,11 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <param name="userId">Owner ID</param>
     /// <returns>Reservation details for the owner</returns>
     /// <response code="200">Details successfully retrieved</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Owner not found or no reservations</response>
     [HttpGet("reservation-user-details/{userId:int}")]
     [ProducesResponseType(typeof(ReservationDetailsResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetReservationUserDetailsAsync(int userId)
     {
@@ -188,9 +203,11 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <param name="startDate">Start date of the reservation</param>
     /// <returns>List of reservations with the specified start date</returns>
     /// <response code="200">Reservations successfully retrieved</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">No reservations found for the date</response>
     [HttpGet("by-start-date/{startDate}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetReservationByStartDateAsync(DateTime startDate)
     {
@@ -213,9 +230,11 @@ public class ReservationController(IReservationCommandService reservationCommand
     /// <param name="endDate">End date of the reservation</param>
     /// <returns>List of reservations with the specified end date</returns>
     /// <response code="200">Reservations successfully retrieved</response>
+    /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">No reservations found for the date</response>
     [HttpGet("by-end-date/{endDate}")]
     [ProducesResponseType(typeof(ReservationResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetReservationByEndDateAsync(DateTime endDate)
     {

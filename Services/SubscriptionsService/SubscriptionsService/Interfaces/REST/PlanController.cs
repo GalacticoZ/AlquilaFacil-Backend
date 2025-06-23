@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using SubscriptionsService.Domain.Model.Queries;
 using SubscriptionsService.Domain.Services;
 using SubscriptionsService.Interfaces.REST.Resources;
@@ -14,6 +15,7 @@ namespace SubscriptionsService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize]
 public class PlanController(IPlanQueryService planQueryService) : ControllerBase
 {
     /// <summary>
@@ -21,6 +23,7 @@ public class PlanController(IPlanQueryService planQueryService) : ControllerBase
     /// </summary>
     [HttpGet]
     [ProducesResponseType(typeof(PlanResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllPlans()
     {

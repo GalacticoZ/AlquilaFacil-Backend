@@ -1,5 +1,6 @@
 using System.Net.Mime;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using NotificationService.Domain.Models.Commands;
 using NotificationService.Domain.Models.Queries;
 using NotificationService.Domain.Services;
@@ -15,6 +16,7 @@ namespace NotificationService.Interfaces.REST;
 [Produces(MediaTypeNames.Application.Json)]
 [ApiController]
 [Route("api/v1/[controller]")]
+[Authorize] 
 public class NotificationController(INotificationCommandService notificationCommandService, INotificationQueryService notificationQueryService) : ControllerBase
 {
     /// <summary>
@@ -22,6 +24,7 @@ public class NotificationController(INotificationCommandService notificationComm
     /// </summary>
     [HttpGet("{userId}")]
     [ProducesResponseType(typeof(NotificationResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetNotificationsByUserId(int userId)
     {
@@ -44,6 +47,7 @@ public class NotificationController(INotificationCommandService notificationComm
     [HttpDelete("{notificationId}")]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteNotification(int notificationId)

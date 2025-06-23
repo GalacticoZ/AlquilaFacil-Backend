@@ -5,6 +5,7 @@ using LocalsService.Interfaces.REST.Resources;
 using LocalsService.Interfaces.REST.Transform;
 using LocalsService.Locals.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Shared.Interfaces.REST.Resources;
 
 namespace LocalsService.Interfaces.REST;
@@ -15,13 +16,20 @@ namespace LocalsService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
+[Authorize]
 public class CommentController(ICommentCommandService commandService, ICommentQueryService queryService) : ControllerBase
 {
     /// <summary>
     /// GET endpoint to retrieve all comments for a specific local
     /// </summary>
+    /// <param name="localId">ID of the local</param>
+    /// <returns>List of comments for the local</returns>
+    /// <response code="200">Comments successfully retrieved</response>
+    /// <response code="401">Unauthorized - Token required</response>
+    /// <response code="404">Local not found or no comments</response>
     [HttpGet("local/{localId:int}")]
     [ProducesResponseType(typeof(CommentResource), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetAllCommentsByLocalId(int localId)
     {
@@ -41,17 +49,26 @@ public class CommentController(ICommentCommandService commandService, ICommentQu
     /// <summary>
     /// POST endpoint to create a new comment
     /// </summary>
+    /// <param name="resource">Data of the comment to create</param>
+    /// <returns>Created comment</returns>
+    /// <response code="201">Comment successfully created</response>
+    /// <response code="400">Invalid input data</response>
+    /// <response code="401">Unauthorized - Token required</response>
+    /// <response code="404">Related resource not found</response>
+    /// <response code="500">Internal server error</response>
     [HttpPost]
     [ProducesResponseType(typeof(CommentResource), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> CreateComment(CreateCommentResource resource)
+    [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CreateComment([FromBody] CreateCommentResource resource)
     {
         try
         {
             var createCommentCommand = CreateCommentCommandFromResourceAssembler.ToCommandFromResource(resource);
             var comment = await commandService.Handle(createCommentCommand);
-            if (comment is null) return BadRequest();
+            if (comment is null) return BadRequest(new { Error = "Failed to create comment" });
             var commentResource = CommentResourceFromEntityAssembler.ToResourceFromEntity(comment);
             return StatusCode(201, commentResource);
         }
