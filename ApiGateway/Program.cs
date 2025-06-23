@@ -1,8 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
 
-var reverseProxySection = builder.Configuration.GetSection("ReverseProxy");
+builder.Services
+    .AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
 
-builder.Services.AddReverseProxy().LoadFromConfig(reverseProxySection);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -10,6 +20,8 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors("AllowAllPolicy");
 
 app.MapReverseProxy();
 
