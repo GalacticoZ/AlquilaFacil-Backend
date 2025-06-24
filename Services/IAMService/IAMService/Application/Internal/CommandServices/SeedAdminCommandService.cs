@@ -26,12 +26,12 @@ public class SeedAdminCommandService(IUserRepository repository, IUserCommandSer
         var signUpCommand = new SignUpCommand(username, password, email, name, fatherName, motherName, dateOfBirth,
             documentNumber, phone);
         var user = await commandService.Handle(signUpCommand);
-        /*
+        
         await externalService.UpdateProfile(name, fatherName, motherName, dateOfBirth, documentNumber, phone,
             bankAccountNumber, interbankAccountNumber, user!.Id);
         user.UpgradeToAdmin();
         repository.Update(user);
-        */
+        
         await unitOfWork.CompleteAsync();
     }
 }
