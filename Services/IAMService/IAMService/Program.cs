@@ -10,6 +10,7 @@ using IAMService.Infrastructure.Persistence.EFC.Configuration;
 using IAMService.Infrastructure.Persistence.EFC.Repositories;
 using IAMService.Infrastructure.Tokens.JWT.Configuration;
 using IAMService.Infrastructure.Tokens.JWT.Services;
+using Shared.Interfaces.ACL.Facades;
 using Shared.Interfaces.ACL.Facades.Services;
 using Shared.Domain.Repositories;
 using Shared.Infrastructure.Persistence.EFC.Repositories;
