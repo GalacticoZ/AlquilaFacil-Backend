@@ -1,4 +1,4 @@
-namespace ProfilesService.Interfaces.ACL;
+namespace Shared.Interfaces.ACL.Facades;
 
 public interface IProfilesContextFacade
 {

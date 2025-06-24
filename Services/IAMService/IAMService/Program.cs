@@ -17,7 +17,6 @@ using Shared.Infrastructure.Persistence.EFC.Repositories;
 using Shared.Interfaces.ASP.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using ProfilesService.Interfaces.ACL;
 using Shared.Infrastructure.Persistence.EFC.Configuration;
 using System.Reflection;
 using System.Text;

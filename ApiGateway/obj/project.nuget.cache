@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "WUc0f0vQA9I=",
+  "dgSpecHash": "kh8CUwtX1wCeYGyNylGVVzgNSdkop0wV/xG6g0Drc7nCL5aSjAO4seoXhM6rupa8so6t/3o5pFcRhSAlJ/uIYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\crtcl\\OneDrive\\Desktop\\Nueva carpeta (4)\\AlquilaFacil-Backend\\ApiGateway\\ApiGateway.csproj",
+  "projectFilePath": "C:\\Users\\Chizo\\Videos\\Fundamentos\\AlquilaFacil-Backend\\ApiGateway\\ApiGateway.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\crtcl\\.nuget\\packages\\system.io.hashing\\8.0.0\\system.io.hashing.8.0.0.nupkg.sha512",
-    "C:\\Users\\crtcl\\.nuget\\packages\\yarp.reverseproxy\\2.2.0\\yarp.reverseproxy.2.2.0.nupkg.sha512"
+    "C:\\Users\\Chizo\\.nuget\\packages\\system.io.hashing\\8.0.0\\system.io.hashing.8.0.0.nupkg.sha512",
+    "C:\\Users\\Chizo\\.nuget\\packages\\yarp.reverseproxy\\2.2.0\\yarp.reverseproxy.2.2.0.nupkg.sha512"
   ],
   "logs": []
 }

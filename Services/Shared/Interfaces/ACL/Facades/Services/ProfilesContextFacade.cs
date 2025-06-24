@@ -1,6 +1,6 @@
-using ProfilesService.Interfaces.ACL;
+using Shared.Interfaces.ACL.Facades;
 
-namespace IAMService.Interfaces.ACL.Facades.Services;
+namespace Shared.Interfaces.ACL.Facades.Services;
 
 public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFacade
 {
