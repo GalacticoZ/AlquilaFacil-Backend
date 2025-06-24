@@ -172,7 +172,7 @@ builder.Services.AddAuthentication("Bearer")
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes(builder.Configuration["JWT_SECRET"])),
+                Encoding.ASCII.GetBytes(builder.Configuration["TokenSettings:Secret"])),
             ValidateIssuer = false,
             ValidateAudience = false
         };
