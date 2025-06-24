@@ -52,7 +52,7 @@ public class UserCommandService(
         {
             await userRepository.AddAsync(user);
             await unitOfWork.CompleteAsync();
-            /*
+
             await profilesUserExternalService.CreateProfile(
                 command.Name,
                 command.FatherName,
@@ -62,7 +62,7 @@ public class UserCommandService(
                 command.Phone,
                 user.Id
             );
-            */
+
         }
         catch (Exception e)
         {

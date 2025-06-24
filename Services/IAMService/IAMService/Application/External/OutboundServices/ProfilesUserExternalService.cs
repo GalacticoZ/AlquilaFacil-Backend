@@ -1,4 +1,4 @@
-using ProfilesService.Interfaces.ACL;
+using Shared.Interfaces.ACL.Facades;
 
 namespace IAMService.Application.External.OutboundServices;
 
