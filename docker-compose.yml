@@ -1,0 +1,387 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: bitnami/kafka:3.4.0
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_KRAFT_MODE=no
+      - KAFKA_ENABLE_KRAFT=no
+    ports:
+      - "9092:9092"
+
+  iam-database:
+    image: 'mysql:latest'
+    container_name: iam-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: iam-database
+      MYSQL_USER: iamuser
+      MYSQL_PASSWORD: iamsecure
+    ports:
+      - "3307:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - iam-database-data:/var/lib/mysql
+
+  iam-service-1:
+    build:
+      context: .
+      dockerfile: Services/IAMService/IAMService/Dockerfile
+    container_name: iam-service-1
+    depends_on:
+      iam-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8011:8011"
+
+  iam-service-2:
+    build:
+      context: .
+      dockerfile: Services/IAMService/IAMService/Dockerfile
+    container_name: iam-service-2
+    depends_on:
+      iam-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8021:8011"
+
+  locals-database:
+    image: 'mysql:latest'
+    container_name: locals-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: locals-database
+      MYSQL_USER: localsuser
+      MYSQL_PASSWORD: localssecure
+    ports:
+      - "3308:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - locals-database-data:/var/lib/mysql
+
+  locals-service-1:
+    build:
+      context: .
+      dockerfile: Services/LocalsService/LocalsService/Dockerfile
+    container_name: locals-service-1
+    depends_on:
+      locals-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8012:8012"
+
+  locals-service-2:
+    build:
+      context: .
+      dockerfile: Services/LocalsService/LocalsService/Dockerfile
+    container_name: locals-service-2
+    depends_on:
+      locals-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8022:8012"
+  
+  booking-database:
+    image: 'mysql:latest'
+    container_name: booking-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: booking-database
+      MYSQL_USER: bookinguser
+      MYSQL_PASSWORD: bookingsecure
+    ports:
+      - "3309:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - booking-database-data:/var/lib/mysql
+
+  booking-service-1:
+    build:
+      context: .
+      dockerfile: Services/BookingService/BookingService/Dockerfile
+    container_name: booking-service-1
+    depends_on:
+      kafka:
+        condition: service_started
+      booking-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8013:8013"
+
+  booking-service-2:
+    build:
+      context: .
+      dockerfile: Services/BookingService/BookingService/Dockerfile
+    container_name: booking-service-2
+    depends_on:
+      kafka:
+        condition: service_started
+      booking-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8023:8013"
+
+  profiles-database:
+    image: 'mysql:latest'
+    container_name: profiles-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: profiles-database
+      MYSQL_USER: profilesuser
+      MYSQL_PASSWORD: profilessecure
+    ports:
+      - "3310:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - profiles-database-data:/var/lib/mysql
+  
+  profiles-service-1:
+    build:
+      context: .
+      dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
+    container_name: profiles-service-1
+    depends_on:
+      profiles-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8014:8014"
+
+  profiles-service-2:
+    build:
+      context: .
+      dockerfile: Services/ProfilesService/ProfilesService/Dockerfile
+    container_name: profiles-service-2
+    depends_on:
+      profiles-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8024:8014"
+
+  notification-database:
+    image: 'mysql:latest'
+    container_name: notification-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: notification-database
+      MYSQL_USER: notificationuser
+      MYSQL_PASSWORD: notificationsecure
+    ports:
+      - "3311:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - notification-database-data:/var/lib/mysql
+  
+  notification-service-1:
+    build:
+      context: .
+      dockerfile: Services/NotificationService/NotificationService/Dockerfile
+    container_name: notification-service-1
+    depends_on:
+      kafka:
+        condition: service_started
+      notification-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8015:8015"
+
+  notification-service-2:
+    build:
+      context: .
+      dockerfile: Services/NotificationService/NotificationService/Dockerfile
+    container_name: notification-service-2
+    depends_on:
+      kafka:
+        condition: service_started
+      notification-database:
+        condition: service_healthy
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8025:8015"
+  
+  subscriptions-database:
+    image: 'mysql:latest'
+    container_name: subscriptions-database
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: subscriptions-database
+      MYSQL_USER: subscriptionsuser
+      MYSQL_PASSWORD: subscriptionssecure
+    ports:
+      - "3312:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - subscriptions-database-data:/var/lib/mysql
+  
+  subscriptions-service-1:
+    build:
+      context: .
+      dockerfile: Services/SubscriptionsService/SubscriptionsService/Dockerfile
+    container_name: subscriptions-service-1
+    depends_on:
+      subscriptions-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8016:8016"
+
+  subscriptions-service-2:
+    build:
+      context: .
+      dockerfile: Services/SubscriptionsService/SubscriptionsService/Dockerfile
+    container_name: subscriptions-service-2
+    depends_on:
+      subscriptions-database:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8026:8016"
+
+  communication-database:
+    image: mongo:latest
+    container_name: communication-database
+    ports:
+      - "27017:27017"
+    volumes:
+      - communication-database-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+  
+  communication-service:
+    build:
+      context: .
+      dockerfile: Services/CommunicationService/Dockerfile
+    container_name: communication-service
+    depends_on:
+      communication-database:
+        condition: service_healthy
+    environment:
+      - MONGO_URL=mongodb://communication-database:27017/chat
+      - NODE_ENV=production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8017:8017"
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - iam-service-1
+      - iam-service-2
+      - locals-service-1
+      - locals-service-2
+      - booking-service-1
+      - booking-service-2
+      - profiles-service-1
+      - profiles-service-2
+      - notification-service-1
+      - notification-service-2
+      - subscriptions-service-1
+      - subscriptions-service-2
+      - communication-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - JWT_SECRET=miSuperClave
+    ports:
+      - "8000:80"
+  
+  frontend:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://alquilafacil-app.brazilsouth.cloudapp.azure.com:8000
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_BASE_URL=http://alquilafacil-app.brazilsouth.cloudapp.azure.com:8000
+
+volumes:
+  iam-database-data:
+  locals-database-data:
+  booking-database-data:
+  profiles-database-data:
+  notification-database-data:
+  subscriptions-database-data:
+  communication-database-data:

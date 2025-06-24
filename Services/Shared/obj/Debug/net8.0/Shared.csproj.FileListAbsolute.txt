@@ -1,0 +1,247 @@
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.AssemblyReference.cache
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.AssemblyInfoInputs.cache
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.AssemblyInfo.cs
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.CoreCompileInputs.cache
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.sourcelink.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\appsettings.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.exe
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.deps.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.runtimeconfig.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.pdb
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\EntityFrameworkCore.CreatedUpdatedDate.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Google.Protobuf.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Humanizer.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySql.Data.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySql.EntityFrameworkCore.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\af\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ar\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\az\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\bg\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\bn-BD\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\cs\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\da\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\de\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\el\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\es\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fa\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fi-FI\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fr\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fr-BE\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\he\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hr\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hu\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hy\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\id\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\is\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\it\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ja\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ko-KR\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ku\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\lv\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ms-MY\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\mt\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nb\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nb-NO\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nl\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\pl\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\pt\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ro\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ru\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sk\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sl\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sr\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sr-Latn\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sv\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\th-TH\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\tr\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uk\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uz-Cyrl-UZ\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uz-Latn-UZ\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\vi\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-CN\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-Hans\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-Hant\Humanizer.resources.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.Shared.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.build.Shared.props
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Shared.props
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Shared.props
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\scopedcss\bundle\Shared.styles.css
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.Up2Date
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\refint\Shared.dll
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.pdb
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.genruntimeconfig.cache
+C:\Users\Chizo\Videos\Fundamentos\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\ref\Shared.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.staticwebassets.endpoints.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.exe
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.deps.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.runtimeconfig.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Shared.pdb
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\EntityFrameworkCore.CreatedUpdatedDate.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Google.Protobuf.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Humanizer.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySql.Data.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySql.EntityFrameworkCore.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\MySqlConnector.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\af\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ar\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\az\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\bg\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\bn-BD\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\cs\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\da\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\de\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\el\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\es\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fa\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fi-FI\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fr\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\fr-BE\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\he\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hr\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hu\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\hy\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\id\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\is\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\it\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ja\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ko-KR\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ku\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\lv\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ms-MY\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\mt\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nb\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nb-NO\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\nl\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\pl\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\pt\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ro\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\ru\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sk\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sl\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sr\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sr-Latn\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\sv\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\th-TH\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\tr\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uk\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uz-Cyrl-UZ\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\uz-Latn-UZ\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\vi\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-CN\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-Hans\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\zh-Hant\Humanizer.resources.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.AssemblyReference.cache
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.AssemblyInfoInputs.cache
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.AssemblyInfo.cs
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.CoreCompileInputs.cache
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.sourcelink.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\scopedcss\bundle\Shared.styles.css
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.Shared.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.Shared.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.build.Shared.props
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Shared.props
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Shared.props
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.csproj.Up2Date
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\refint\Shared.dll
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.pdb
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\Shared.genruntimeconfig.cache
+C:\Users\crtcl\OneDrive\Desktop\Nueva carpeta (4)\AlquilaFacil-Backend\Services\Shared\obj\Debug\net8.0\ref\Shared.dll
