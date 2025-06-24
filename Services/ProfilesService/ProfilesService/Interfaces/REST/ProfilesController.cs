@@ -16,7 +16,6 @@ namespace ProfilesService.Interfaces.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-[Authorize]
 public class ProfilesController(
     IProfileCommandService profileCommandService, 
     IProfileQueryService profileQueryService)
