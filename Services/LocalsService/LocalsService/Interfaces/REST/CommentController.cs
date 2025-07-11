@@ -3,7 +3,7 @@ using LocalsService.Domain.Model.Queries;
 using LocalsService.Domain.Services;
 using LocalsService.Interfaces.REST.Resources;
 using LocalsService.Interfaces.REST.Transform;
-using LocalsService.Locals.Domain.Services;
+using LocalsService.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Shared.Interfaces.REST.Resources;

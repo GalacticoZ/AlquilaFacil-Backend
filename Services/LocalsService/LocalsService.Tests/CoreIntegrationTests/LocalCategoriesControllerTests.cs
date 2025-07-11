@@ -1,6 +1,6 @@
 using LocalsService.Domain.Model.Entities;
 using Moq;
-using LocalsService.Locals.Interfaces.REST;
+using LocalsService.Interfaces.REST;
 using LocalsService.Domain.Services;
 using LocalsService.Domain.Model.Queries;
 using LocalsService.Interfaces.REST.Resources;

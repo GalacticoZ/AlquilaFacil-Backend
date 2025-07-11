@@ -5,7 +5,7 @@ using LocalsService.Interfaces.REST;
 using LocalsService.Domain.Services;
 using LocalsService.Domain.Model.Queries;
 using LocalsService.Interfaces.REST.Resources;
-using LocalsService.Locals.Domain.Services;
+using LocalsService.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocalsService.Tests.CoreIntegrationTests;
