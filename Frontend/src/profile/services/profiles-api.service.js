@@ -18,7 +18,7 @@ export class ProfilesApiService {
     return response.data;
   }
   async getSubscriptionStatusByUserId(userId) {
-    const response = await http.get(`${this.serviceBaseUrl}/subscription-status/${userId}`);
+    const response = await http.get(`/subscriptions/api/v1/subscriptions/status/${userId}`);
     return response.data;
   }
   async getBankAccountsByUserId(userId) {

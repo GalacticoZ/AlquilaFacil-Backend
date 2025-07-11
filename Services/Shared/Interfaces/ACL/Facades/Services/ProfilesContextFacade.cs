@@ -31,9 +31,8 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
 
         if (response.IsSuccessStatusCode)
         {
-            var content = await response.Content.ReadAsStringAsync();
-                
-            return int.Parse(content);
+            var profileResource = await response.Content.ReadFromJsonAsync<ProfileResource>();
+            return profileResource.Id;
         }
 
 
@@ -71,12 +70,19 @@ public class ProfilesContextFacade(HttpClient httpClient) : IProfilesContextFaca
 
         if (response.IsSuccessStatusCode)
         {
-            var content = await response.Content.ReadAsStringAsync();
-                
-            return int.Parse(content);
+            var profileResource = await response.Content.ReadFromJsonAsync<ProfileResource>();
+                        return profileResource.Id;
         }
 
 
         throw new Exception($"Error creating profile: {response.StatusCode}");
     }
 }
+
+public record ProfileResource(
+    int Id, 
+    string FullName, 
+    string Phone, 
+    string DocumentNumber, 
+    string DateOfBirth
+);
