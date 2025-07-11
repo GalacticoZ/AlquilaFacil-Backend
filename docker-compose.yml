@@ -52,9 +52,9 @@ services:
       iam-database:
         condition: service_healthy
       profiles-service-1:
-        condition: service_healthy
+        condition: service_started
       profiles-service-2:
-        condition: service_healthy
+        condition: service_started
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - JWT_SECRET=miSuperClave
@@ -70,9 +70,9 @@ services:
       iam-database:
         condition: service_healthy
       profiles-service-1:
-        condition: service_healthy
+        condition: service_started
       profiles-service-2:
-        condition: service_healthy
+        condition: service_started
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - JWT_SECRET=miSuperClave
@@ -361,11 +361,11 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_BASE_URL: http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000/api/v1
+        VITE_API_BASE_URL: http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000
     ports:
       - "3100:100"
     environment:
-      - VITE_API_BASE_URL=http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000/api/v1
+      - VITE_API_BASE_URL=http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000
 
 volumes:
   iam-database-data:

@@ -9,12 +9,12 @@ public class LocalQueryService(ILocalRepository localRepository) : ILocalQuerySe
 {
     public async Task<IEnumerable<Local>> Handle(GetAllLocalsQuery query)
     {
-        return await localRepository.ListAsync();
+        return await localRepository.GetLocalsAsync();
     }
 
     public async Task<Local?> Handle(GetLocalByIdQuery query)
     {
-        return await localRepository.FindByIdAsync(query.LocalId);
+        return await localRepository.GetLocalByIdAsync(query.LocalId);
     }
 
     public async Task<HashSet<string>> Handle(GetAllLocalDistrictsQuery query)

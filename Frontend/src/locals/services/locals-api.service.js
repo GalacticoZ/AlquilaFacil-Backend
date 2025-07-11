@@ -50,7 +50,7 @@ export class LocalsApiService {
   }
 
   async getUserLocals(userId) {
-    const response = await http.get(`${this.serviceBaseUrl}/by-user-id/${userId}`);
+    const response = await http.get(`${this.serviceBaseUrl}/get-user-locals/${userId}`);
     return response.data;
   }
 
