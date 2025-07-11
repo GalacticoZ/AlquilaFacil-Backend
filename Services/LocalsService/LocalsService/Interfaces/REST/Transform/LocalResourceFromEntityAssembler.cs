@@ -9,16 +9,15 @@ public static class LocalResourceFromEntityAssembler
     {
         return new LocalResource(
             local.Id, 
-            local.StreetAddress, 
-            local.LocalName,
-            local.CityPlace,
-            local.NightPrice, 
-            local.PhotoUrl,
+            local.LocalName, 
             local.DescriptionMessage,
-            local.LocalCategoryId,
-            local.UserId,
+            local.Address,
+            local.Price, 
+            local.Capacity,
+            local.LocalPhotos.Select(photo => photo.Url),
             local.Features,
-            local.Capacity
-            );
+            local.LocalCategoryId,
+            local.UserId
+        );
     }
 }

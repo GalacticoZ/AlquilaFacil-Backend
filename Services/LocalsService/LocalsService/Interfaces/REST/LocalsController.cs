@@ -39,7 +39,7 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
     {
         try
         {
-            var createLocalCommand = CreateLocalCommandFromResourceAssembler.ToCommandFromResources(resource);
+            var createLocalCommand = CreateLocalCommandFromResourceAssembler.ToCommandFromResource(resource);
             var local = await localCommandService.Handle(createLocalCommand);
             if (local is null) return BadRequest(new { Error = "Failed to create local" });
             var localResource = LocalResourceFromEntityAssembler.ToResourceFromEntity(local);
@@ -195,12 +195,12 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
     [ProducesResponseType(typeof(LocalResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
-    public IActionResult GetAllDistricts()
+    public async Task<IActionResult> GetAllDistricts()
     {
         try
         {
             var getAllLocalDistrictsQuery = new GetAllLocalDistrictsQuery();
-            var districts = localQueryService.Handle(getAllLocalDistrictsQuery);
+            var districts = await localQueryService.Handle(getAllLocalDistrictsQuery);
             return Ok(districts);
         }
         catch (Exception ex)

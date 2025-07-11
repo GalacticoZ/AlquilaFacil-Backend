@@ -1,7 +1,7 @@
 using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Model.Commands;
 using LocalsService.Domain.Repositories;
-using LocalsService.Locals.Domain.Services;
+using LocalsService.Domain.Services;
 using Shared.Application.External.OutboundServices;
 using Shared.Domain.Repositories;
 

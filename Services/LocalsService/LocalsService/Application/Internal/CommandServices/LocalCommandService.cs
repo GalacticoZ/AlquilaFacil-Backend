@@ -1,6 +1,7 @@
 using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Model.Commands;
+using LocalsService.Domain.Model.Entities;
 using LocalsService.Domain.Services;
 using Shared.Application.External.OutboundServices;
 using Shared.Domain.Repositories;
@@ -29,7 +30,17 @@ public class LocalCommandService (ILocalRepository localRepository, ILocalCatego
         {
             throw new BadHttpRequestException("Price must be greater than 0");
         }
+        if (!command.PhotoUrls.Any())
+        {
+            throw new Exception("At least one photo URL must be provided");
+        }
+        
         var local = new Local(command);
+        
+        foreach (var photoUrl in command.PhotoUrls)
+        {
+            local.LocalPhotos.Add(new LocalPhoto(photoUrl));
+        }
         await localRepository.AddAsync(local);
         await unitOfWork.CompleteAsync();
         return local;

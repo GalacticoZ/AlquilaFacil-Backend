@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Shared.Interfaces.REST.Resources;
 
-namespace LocalsService.Locals.Interfaces.REST;
+namespace LocalsService.Interfaces.REST;
 
 /// <summary>
 /// Controller for managing local categories

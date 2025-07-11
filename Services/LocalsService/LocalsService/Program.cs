@@ -5,7 +5,7 @@ using LocalsService.Domain.Repositories;
 using LocalsService.Domain.Services;
 using LocalsService.Infrastructure.Persistence.EFC.Configuration;
 using LocalsService.Infrastructure.Persistence.EFC.Repositories;
-using LocalsService.Locals.Domain.Services;
+using LocalsService.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Shared.Application.External.OutboundServices;

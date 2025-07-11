@@ -1,8 +1,8 @@
 namespace LocalsService.Domain.Model.ValueObjects;
 
-public record RatingComment(int Value)
+public record PricePerHour(int Value)
 {
-    public RatingComment() : this(0)
+    public PricePerHour() : this(0)
     {
         
     }

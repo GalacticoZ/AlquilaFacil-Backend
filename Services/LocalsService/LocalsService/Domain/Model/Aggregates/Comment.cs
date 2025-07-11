@@ -35,8 +35,8 @@ public partial class Comment
     public TextComment Text { get; set; }
     public RatingComment Rating { get; set; }
 
-    public string CommentText => Text.Text;
+    public string CommentText => Text.Value;
 
-    public int CommentRating => Rating.Rating;
+    public int CommentRating => Rating.Value;
 
 }

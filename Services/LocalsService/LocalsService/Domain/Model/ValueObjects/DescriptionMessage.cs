@@ -1,8 +1,8 @@
 namespace LocalsService.Domain.Model.ValueObjects;
 
-public record DescriptionMessage(string MessageDescription)
+public record DescriptionMessage(string Value)
 {
-    public DescriptionMessage() : this(String.Empty)
+    public DescriptionMessage() : this(string.Empty)
     {
         
     }

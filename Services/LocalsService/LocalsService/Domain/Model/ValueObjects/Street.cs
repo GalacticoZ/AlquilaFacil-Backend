@@ -1,8 +1,8 @@
 namespace LocalsService.Domain.Model.ValueObjects;
 
-public record RatingComment(int Value)
+public record Street(string Value)
 {
-    public RatingComment() : this(0)
+    public Street() : this(string.Empty)
     {
         
     }

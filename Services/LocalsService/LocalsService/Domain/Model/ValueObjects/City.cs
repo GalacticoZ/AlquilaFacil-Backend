@@ -1,8 +1,8 @@
 namespace LocalsService.Domain.Model.ValueObjects;
 
-public record NightPrice(int PriceNight)
+public record City(string Value)
 {
-    public NightPrice() : this(0)
+    public City() : this(string.Empty)
     {
         
     }

@@ -61,7 +61,7 @@ public class ReservationCommandService(
          BookingId = reservationCreated.Id,
          UserEmail = reservationUser.Email,
          CreatedAt = DateTime.UtcNow,
-         Content = "Reservation Created, from user" + reservationUser.Username + " at " + DateTime.UtcNow,
+         Content = "El usuario, "+ reservationUser.Username + "ha realizado una reserva en el local: " + reservation.LocalId + " desde " + reservation.StartDate.ToString("dd/MM/yyyy") + " hasta " + reservation.EndDate.ToString("dd/MM/yyyy") + ".",
          OwnerId = ownerId
      });
      

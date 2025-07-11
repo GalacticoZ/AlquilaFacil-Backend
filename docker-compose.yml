@@ -51,6 +51,10 @@ services:
     depends_on:
       iam-database:
         condition: service_healthy
+      profiles-service-1:
+        condition: service_healthy
+      profiles-service-2:
+        condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - JWT_SECRET=miSuperClave
@@ -64,6 +68,10 @@ services:
     container_name: iam-service-2
     depends_on:
       iam-database:
+        condition: service_healthy
+      profiles-service-1:
+        condition: service_healthy
+      profiles-service-2:
         condition: service_healthy
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

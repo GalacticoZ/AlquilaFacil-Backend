@@ -1,7 +1,7 @@
 using LocalsService.Domain.Model.Aggregates;
 using LocalsService.Domain.Model.Commands;
 
-namespace LocalsService.Locals.Domain.Services;
+namespace LocalsService.Domain.Services;
 
 public interface ICommentCommandService
 {

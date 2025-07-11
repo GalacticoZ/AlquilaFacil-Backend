@@ -1,6 +1,16 @@
 namespace LocalsService.Domain.Model.Commands;
 
 public record CreateLocalCommand(
-    string District, string Street, string LocalType, string Country, string City, int Price, string PhotoUrl, string DescriptionMessage, int LocalCategoryId, int UserId,
-    string Features, int Capacity
-    );
+    string LocalName,
+    string DescriptionMessage,
+    string Country,
+    string City,
+    string District,
+    string Street,
+    int Price,
+    int Capacity,
+    IEnumerable<string> PhotoUrls,
+    string Features,
+    int LocalCategoryId,
+    int UserId
+);

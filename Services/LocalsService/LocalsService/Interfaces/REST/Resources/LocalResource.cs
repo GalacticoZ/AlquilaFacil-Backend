@@ -1,4 +1,14 @@
 namespace LocalsService.Interfaces.REST.Resources;
 
-public record LocalResource(int Id, string StreetAddress, string LocalName, string CityPlace, int NightPrice, 
-    string PhotoUrl, string DescriptionMessage, int LocalCategoryId, int UserId, string Features,int Capacity);
+public record LocalResource(
+    int Id,
+    string LocalName,
+    string DescriptionMessage,
+    string Address,
+    int Price,
+    int Capacity,
+    IEnumerable<string> PhotoUrls,
+    string Features,
+    int LocalCategoryId,
+    int UserId
+);

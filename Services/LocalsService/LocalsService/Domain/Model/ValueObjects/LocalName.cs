@@ -1,6 +1,6 @@
 namespace LocalsService.Domain.Model.ValueObjects;
 
-public record LocalName(string TypeLocal)
+public record LocalName(string Value)
 {
     public LocalName() : this(String.Empty)
     {
