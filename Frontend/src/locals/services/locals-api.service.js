@@ -40,12 +40,12 @@ export class LocalsApiService {
   }
 
   async getByCategoryAndCapacityRange(categoryId, minCapacity, maxCapacity) {
-    const response = await http.get(`${this.serviceBaseUrl}/by-category-and-capacity/${categoryId}/${minCapacity}/${maxCapacity}`);
+    const response = await http.get(`${this.serviceBaseUrl}/search-by-category-id-capacity-range/${categoryId}/${minCapacity}/${maxCapacity}`);
     return response.data;
   }
 
   async getAllDistricts() {
-    const response = await http.get(`${this.serviceBaseUrl}/districts`);
+    const response = await http.get(`${this.serviceBaseUrl}/get-all-districts`);
     return response.data;
   }
 

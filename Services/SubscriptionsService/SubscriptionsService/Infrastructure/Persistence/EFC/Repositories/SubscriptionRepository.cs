@@ -12,7 +12,9 @@ public class SubscriptionRepository(AppDbContext context)
     public async Task<Subscription?> FindByUserIdAsync(int userId)
     {
         return await context.Set<Subscription>()
-            .LastOrDefaultAsync(s => s.UserId == userId);
+            .Where(s => s.UserId == userId)
+            .OrderByDescending(s => s.Id)
+            .FirstOrDefaultAsync();
     }
     
     public async Task<IEnumerable<Subscription>> FindByUserIdsListAsync(List<int> userIdsList)
