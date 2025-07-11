@@ -80,7 +80,7 @@ services:
       MYSQL_USER: localsuser
       MYSQL_PASSWORD: localssecure
     ports:
-      - "3308:3306"
+      - "3318:3306"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
       interval: 10s
@@ -233,11 +233,11 @@ services:
     volumes:
       - notification-database-data:/var/lib/mysql
   
-  notification-service-1:
+  notification-service:
     build:
       context: .
       dockerfile: Services/NotificationService/NotificationService/Dockerfile
-    container_name: notification-service-1
+    container_name: notification-service
     depends_on:
       kafka:
         condition: service_started
@@ -249,23 +249,6 @@ services:
       - JWT_SECRET=miSuperClave
     ports:
       - "8015:8015"
-
-  notification-service-2:
-    build:
-      context: .
-      dockerfile: Services/NotificationService/NotificationService/Dockerfile
-    container_name: notification-service-2
-    depends_on:
-      kafka:
-        condition: service_started
-      notification-database:
-        condition: service_healthy
-    environment:
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - ASPNETCORE_ENVIRONMENT=Production
-      - JWT_SECRET=miSuperClave
-    ports:
-      - "8025:8015"
   
   subscriptions-database:
     image: 'mysql:latest'
@@ -355,8 +338,7 @@ services:
       - booking-service-2
       - profiles-service-1
       - profiles-service-2
-      - notification-service-1
-      - notification-service-2
+      - notification-service
       - subscriptions-service-1
       - subscriptions-service-2
       - communication-service
@@ -371,11 +353,11 @@ services:
       context: ./Frontend
       dockerfile: Dockerfile
       args:
-        VITE_API_BASE_URL: http://alquilafacil-app.brazilsouth.cloudapp.azure.com:8000
+        VITE_API_BASE_URL: http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000/api/v1
     ports:
-      - "3000:80"
+      - "3100:100"
     environment:
-      - VITE_API_BASE_URL=http://alquilafacil-app.brazilsouth.cloudapp.azure.com:8000
+      - VITE_API_BASE_URL=http://alquilafacil-app.chilecentral.cloudapp.azure.com:8000/api/v1
 
 volumes:
   iam-database-data:

@@ -84,6 +84,7 @@ public class SubscriptionsController(
     /// GET endpoint to get the subscription status of a specific user
     /// </summary>
     [HttpGet("status/{userId}")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(object), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]

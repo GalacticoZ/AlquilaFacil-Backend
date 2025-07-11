@@ -94,6 +94,7 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
     /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Local not found</response>
     [HttpGet("{localId:int}")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(LocalResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -217,6 +218,7 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
     /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">User not found or no locals</response>
     [HttpGet("get-user-locals/{userId:int}")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(LocalResource), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
@@ -244,6 +246,7 @@ public class LocalsController(ILocalCommandService localCommandService, ILocalQu
     /// <response code="401">Unauthorized - Token required</response>
     /// <response code="404">Local not found</response>
     [HttpGet("owner/{localId:int}")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(typeof(ErrorResponseResource), StatusCodes.Status404NotFound)]
